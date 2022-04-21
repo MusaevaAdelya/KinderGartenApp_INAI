@@ -18,9 +18,12 @@ public class Director {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    private String name;
+
+    private String fullname;
+
     private String email;
     private String password;
+    private String picture;
 
     @Column(name="account_type")
     @Builder.Default

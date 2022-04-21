@@ -38,7 +38,6 @@ public class KindergartenController {
         if(service.checkUser(userEmail,userPassword,accountType)){
             return "redirect:/kindergarten";
         }else{
-            model.addAttribute("wrongInput",true);
             return "redirect:/?wrongInput=true";
         }
     }

@@ -1,7 +1,6 @@
 package com.inai.kindergartenapp.dto;
 
-import com.inai.kindergartenapp.entity.Student;
-import com.inai.kindergartenapp.entity.Subject;
+import com.inai.kindergartenapp.entity.Grade;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +11,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GradeDto {
+    public static GradeDto from(Grade grade){
+        return builder()
+                .id(grade.getId())
+                .subject(SubjectDto.from(grade.getSubject()))
+                .student(StudentDto.from(grade.getStudent()))
+                .firstGrade(grade.getFirstGrade())
+                .secondGrade(grade.getSecondGrade())
+                .thirdGrade(grade.getThirdGrade())
+                .build();
+    }
+
     private Long id;
-    private Subject subject;
-    private Student student;
+    private SubjectDto subject;
+    private StudentDto student;
     private Double firstGrade;
     private Double secondGrade;
     private Double thirdGrade;

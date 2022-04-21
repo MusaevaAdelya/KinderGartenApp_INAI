@@ -23,7 +23,7 @@ public class Attendance {
 
     @ManyToMany
     @JoinColumn(name="student_id")
-    private List<Student> student;
+    private List<Student> students;
     private Boolean present;
 
     @ManyToOne

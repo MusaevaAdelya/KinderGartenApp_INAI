@@ -17,24 +17,17 @@ public class Student {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    private String name;
+
+    private String fullname;
+
     private String email;
     private String password;
+    private String picture;
 
     @Column(name="account_type")
     @Builder.Default
     private String accountType= AccountType.STUDENT.getAccountType();
 
-//    @ManyToOne(optional = false)
-//    private Classroom classrooms;
-//
-//    public Classroom getClassrooms() {
-//        return classrooms;
-//    }
-//
-//    public void setClassrooms(Classroom classrooms) {
-//        this.classrooms = classrooms;
-//    }
 }
 
 

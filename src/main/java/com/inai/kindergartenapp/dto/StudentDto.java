@@ -1,6 +1,6 @@
 package com.inai.kindergartenapp.dto;
 
-import com.inai.kindergartenapp.enums.AccountType;
+import com.inai.kindergartenapp.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,35 +13,23 @@ import javax.persistence.Column;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentDto {
+    public static StudentDto from(Student student){
+        return builder()
+                .id(student.getId())
+                .fullname(student.getFullname())
+                .email(student.getEmail())
+                .accountType(student.getAccountType())
+                .picture(student.getPicture())
+                .build();
+    }
 
     private Long id;
-    private String name;
+    private String fullname;
     private String email;
     private String password;
     private String accountType;
+    private String picture;
 
 }
 
-//@Data
-//@Builder
-//@AllArgsConstructor
-//@NoArgsConstructor
-//public class DishDto {
-//    public static DishDto from(Dish dish){
-//        return builder()
-//                .id(dish.getId())
-//                .name(dish.getName())
-//                .type(dish.getType())
-//                .price(dish.getPrice())
-//                .place(dish.getPlace())
-//                .build();
-//    }
-//
-//    private Long id;
-//    private String name;
-//    private String type;
-//    private Double price;
-//    private Place place;
-//
-//
-//}
+

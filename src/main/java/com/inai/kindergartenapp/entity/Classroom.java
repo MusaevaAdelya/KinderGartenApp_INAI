@@ -26,9 +26,5 @@ public class Classroom {
 
     @ManyToMany
     @JoinColumn(name="student_id")
-    private List<Student> student;
-
-    private Double firstGrade;
-    private Double secondGrade;
-    private Double thirdGrade;
+    private List<Student> students;
 }
