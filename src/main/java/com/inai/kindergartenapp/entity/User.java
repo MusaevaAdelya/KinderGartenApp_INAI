@@ -1,13 +1,16 @@
 package com.inai.kindergartenapp.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 @Data
+@Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public abstract class User {
+    private String fullname;
     private String email;
     private String password;
-    private String accountType;
+    private String picture;
 
 }

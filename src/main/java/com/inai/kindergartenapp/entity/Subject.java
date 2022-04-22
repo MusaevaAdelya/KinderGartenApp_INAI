@@ -3,6 +3,7 @@ package com.inai.kindergartenapp.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,6 +27,10 @@ public class Subject {
     @ManyToOne
     @JoinColumn(name="teacher_id")
     private Teacher teacher;
+
+    @ManyToMany
+    @JoinColumn(name="student_id")
+    private List<Student> students;
 
 
 }

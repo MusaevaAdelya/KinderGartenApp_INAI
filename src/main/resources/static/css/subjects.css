@@ -1,0 +1,453 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: "Poppins",sans-serif;
+}
+
+.main-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* background: #ebf5fc; */
+    
+}
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 78px;
+    background: #11101D;
+    padding: 6px 14px;
+    z-index: 99;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open {
+    width: 250px;
+}
+
+.sidebar .logo-details {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.sidebar .logo-details .icon {
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.sidebar .logo-details .logo_name {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name {
+    opacity: 1;
+}
+
+.sidebar .logo-details #btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: all 0.4s ease;
+    font-size: 23px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .logo-details #btn {
+    text-align: right;
+}
+
+.sidebar i {
+    color: #fff;
+    height: 60px;
+    min-width: 50px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
+}
+
+.sidebar .nav-list {
+    margin-top: 20px;
+    height: 100%;
+    padding-left: 0;
+}
+
+.sidebar li {
+    position: relative;
+    margin: 8px 0;
+    list-style: none;
+}
+
+
+
+.sidebar.open input {
+    padding: 0 20px 0 50px;
+    width: 100%;
+}
+
+.sidebar .bx-search:hover {
+    background: #FFF;
+    color: #11101d;
+}
+
+.sidebar li.active a {
+    background: #91f5ad;
+
+}
+
+.sidebar li.active a i,
+.sidebar li.active a .links_name {
+    color: #11101D;
+}
+
+.sidebar li a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    background: #11101D;
+}
+
+
+
+.sidebar li a:hover {
+    background: #fff;
+}
+
+.sidebar li a .links_name {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+.sidebar.open li a .links_name {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i {
+    transition: all 0.5s ease;
+    color: #11101D;
+}
+
+.sidebar li i {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    border-radius: 12px;
+}
+
+.sidebar .profile {
+    margin-bottom: 30px;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.sidebar.open .profile {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.sidebar .profile img {
+    display: block;
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.sidebar .profile img:hover {
+    box-shadow: 0 0 8px 0 rgba(255, 255, 255),
+        0 0 20px 0 rgba(255, 255, 255, 0.19);
+    transition: all 200ms ease-out;
+    cursor: pointer;
+}
+
+.sidebar .profile h3 {
+    color: #fff;
+    margin: 10px 0 5px;
+    font-size: 18px;
+
+}
+
+.sidebar .profile p {
+    color: rgb(206, 204, 253);
+    font-size: 14px;
+
+}
+
+.main-section {
+    position: relative;
+    background: #E4E9F7;
+    min-height: 100vh;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+.sidebar.open~.main-section {
+    left: 250px;
+    width: calc(100% - 250px);
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    max-width: 1200px;
+    flex-wrap:wrap;
+    padding:40px 0;
+}
+
+.container .card{
+    position:relative;
+    width: 280px;
+    height:385px;
+    box-shadow: inset 5px 5px 5px rgba(0,0,0,0.05),
+                inset -5px -5px 5px rgba(255,255,255,0.5),
+                5px 5px 5px rgba(0,0,0,0.05),
+                -5px -5px 5px rgba(255,255,255,0.5);
+    border-radius:15px;
+    margin:25px;
+}
+
+.container .card .box{
+    position:absolute;
+    top:20px;
+    left: 20px;
+    right:20px;
+    bottom:20px;
+    background: #ebf5fc;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:0.5s;
+    flex-direction: column;
+}
+.container .card:hover .box{
+    transform: translateY(-50px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(45deg, #2693d6, #053C5E);
+}
+
+.container .card .box .content{
+    overflow:hidden;
+    text-align:center;
+    padding:0 15px;
+
+    
+}
+
+
+.container .card .box .content h2{
+    position:absolute;
+    top:-10px;
+    right:30px;
+    font-size: 8em;
+    color:rgba(0,0,0,0.02);
+    transition:0.5s;
+}
+
+.container .card:hover .box .content h2{
+    color:rgba(0,0,0,0.05);
+}
+.container .card .box .content h3{
+    font-size: 1.2em;
+    color:#777;
+    z-index:1;
+    transition:0.5s;
+    margin-bottom: 35px;
+    text-transform: capitalize;
+    
+}
+
+.container .card .box .content p{
+    font-size: 0.9em;
+    font-weight: 300;
+    color:#777;
+    z-index:1;
+    transition:0.5s;
+    margin-bottom: 10px;
+    
+}
+
+.container .card:hover .box .content h3,
+.container .card:hover .box .content p {
+    color:#fff;
+}
+
+.container .card .box  a{
+    position: relative;
+    display: inline-block;
+    padding:8px 20px;
+    background: #03a9f4;
+    margin-top:15px;
+    border-radius: 20px;
+    color:#fff;
+    text-decoration: none;
+    font-weight: 400;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.container .card:hover .box a{
+    background: #87e8a2;
+}
+
+.add-new-card-icon{
+    font-size: 80px;
+    color:#777;
+}
+
+.container .card:hover .box .content i{
+    color: #fff;
+}
+
+.container .card:hover .add-new-card-box {
+
+    background: linear-gradient(45deg, #91F5AD, #3dcc66);
+}
+
+.card-delete-button{
+    position:absolute;
+    top:15px;
+    right:15px;
+}
+
+.read-more-button{
+    position: absolute;
+    bottom:20px;
+}
+.read-more-button a{
+    font-size: 17px;
+}
+
+.card-text{
+    text-align: left;
+    padding-left: 15px;
+}
+
+
+
+/* Select Box */
+
+.custom-select {
+    position: relative;
+    font-family: 'Poppins',
+        sans-serif;
+    border-radius: 25px;
+    width: 450px;
+
+}
+
+.custom-select select {
+    display: none;
+    /*hide original SELECT element: */
+}
+
+.select-selected {
+    background-color: #C4D7F2;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 20px;
+    right: 15px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #000 transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #000 transparent;
+    top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,
+.select-selected {
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+/* Style items (options): */
+.select-items {
+    position: absolute;
+    background-color: #C4D7F2;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-body-style{
+    min-height: 300px;
+}
+
+.modal-form-title-style{
+    min-width: 100px;
+}
+
+.modal-body .input-bar{
+    width:450px;
+}
+
+.modal-content .submit-btn {
+    background-color: #94E7F8;
+}
+.modal-content .submit-btn:hover{
+    background-color: #6bcee2;
+}
+
+

@@ -27,11 +27,18 @@ public class Grade {
     private Student student;
 
     @Column(name="first_grade")
-    private Double firstGrade;
+    @Builder.Default
+    private Integer firstGrade=0;
 
     @Column(name="second_grade")
-    private Double secondGrade;
+    @Builder.Default
+    private Integer secondGrade=0;
 
     @Column(name="third_grade")
-    private Double thirdGrade;
+    @Builder.Default
+    private Integer thirdGrade=0;
+
+    public double getAverageGrade(){
+        return ((firstGrade+secondGrade+thirdGrade)/3.0);
+    }
 }

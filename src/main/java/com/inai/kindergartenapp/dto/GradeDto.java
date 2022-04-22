@@ -25,7 +25,12 @@ public class GradeDto {
     private Long id;
     private SubjectDto subject;
     private StudentDto student;
-    private Double firstGrade;
-    private Double secondGrade;
-    private Double thirdGrade;
+    private Integer firstGrade;
+    private Integer secondGrade;
+    private Integer thirdGrade;
+
+
+    public double getAverageGrade(){
+        return ((firstGrade+secondGrade+thirdGrade)/3.0);
+    }
 }

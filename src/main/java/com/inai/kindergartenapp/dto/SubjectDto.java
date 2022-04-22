@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,10 +20,12 @@ public class SubjectDto {
                 .name(subject.getName())
                 .code(subject.getCode())
                 .teacher(TeacherDto.from(subject.getTeacher()))
+                .students(subject.getStudents().stream().map(s->StudentDto.from(s)).collect(Collectors.toList()))
                 .build();
     }
     private Long id;
     private String name;
     private String  code;
     private TeacherDto teacher;
+    private List<StudentDto> students;
 }

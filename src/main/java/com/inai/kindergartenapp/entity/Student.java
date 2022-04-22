@@ -13,13 +13,12 @@ import javax.persistence.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Student {
+public class Student{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     private String fullname;
-
     private String email;
     private String password;
     private String picture;

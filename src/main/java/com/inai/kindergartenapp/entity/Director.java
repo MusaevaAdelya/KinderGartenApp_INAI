@@ -20,7 +20,6 @@ public class Director {
     private Long id;
 
     private String fullname;
-
     private String email;
     private String password;
     private String picture;

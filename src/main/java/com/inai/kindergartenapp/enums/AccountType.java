@@ -1,9 +1,9 @@
 package com.inai.kindergartenapp.enums;
 
 public enum AccountType {
-    DIRECTOR("Director"),
-    STUDENT("Student"),
-    TEACHER("Teacher");
+    DIRECTOR("director"),
+    STUDENT("student"),
+    TEACHER("teacher");
 
     private final String accountType;
 

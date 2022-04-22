@@ -1,0 +1,474 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 78px;
+    background: #11101D;
+    padding: 6px 14px;
+    z-index: 99;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open {
+    width: 250px;
+}
+
+.sidebar .logo-details {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.sidebar .logo-details .icon {
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.sidebar .logo-details .logo_name {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name {
+    opacity: 1;
+}
+
+.sidebar .logo-details #btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: all 0.4s ease;
+    font-size: 23px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .logo-details #btn {
+    text-align: right;
+}
+
+.sidebar i {
+    color: #fff;
+    height: 60px;
+    min-width: 50px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
+}
+
+.sidebar .nav-list {
+    margin-top: 20px;
+    height: 100%;
+    padding-left: 0;
+}
+
+.sidebar li {
+    position: relative;
+    margin: 8px 0;
+    list-style: none;
+}
+
+
+
+.sidebar.open input {
+    padding: 0 20px 0 50px;
+    width: 100%;
+}
+
+.sidebar .bx-search:hover {
+    background: #FFF;
+    color: #11101d;
+}
+
+.sidebar li.active a {
+    background: #91f5ad;
+
+}
+
+.sidebar li.active a i,
+.sidebar li.active a .links_name {
+    color: #11101D;
+}
+
+.sidebar li a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    background: #11101D;
+}
+
+
+
+.sidebar li a:hover {
+    background: #fff;
+}
+
+.sidebar li a .links_name {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+.sidebar.open li a .links_name {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i {
+    transition: all 0.5s ease;
+    color: #11101D;
+}
+
+.sidebar li i {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    border-radius: 12px;
+}
+
+.sidebar .profile {
+    margin-bottom: 30px;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.sidebar.open .profile {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.sidebar .profile img {
+    display: block;
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.sidebar .profile img:hover {
+    box-shadow: 0 0 8px 0 rgba(255, 255, 255),
+        0 0 20px 0 rgba(255, 255, 255, 0.19);
+    transition: all 200ms ease-out;
+    cursor: pointer;
+}
+
+.sidebar .profile h3 {
+    color: #fff;
+    margin: 10px 0 5px;
+    font-size: 18px;
+
+}
+
+.sidebar .profile p {
+    color: rgb(206, 204, 253);
+    font-size: 14px;
+
+}
+
+.main-section {
+    position: relative;
+    background: #E4E9F7;
+    min-height: 100vh;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+.sidebar.open~.main-section {
+    left: 250px;
+    width: calc(100% - 250px);
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.teacher-photo img {
+    display: block;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: -70px 0 0 0;
+    border: 4px solid white;
+
+}
+
+.teacher-photo img:hover {
+    box-shadow: 0 0 8px 0 rgba(255, 255, 255),
+        0 0 20px 0 rgba(255, 255, 255, 0.19);
+    transition: all 200ms ease-out;
+    cursor: pointer;
+}
+
+.header {
+    height: 200px;
+    width: 100%;
+    background: linear-gradient(45deg, #A71E32, #400D12);
+    margin: 0;
+    padding: 0;
+
+}
+
+.header-info {
+    width: 100%;
+}
+
+.main-info {
+    display: flex;
+    flex-direction: row;
+    padding: 0 0 0 80px;
+}
+
+
+
+.main-info-text {
+    /* background-color:chartreuse; */
+    margin-left: 40px;
+    padding-top: 30px;
+}
+
+.teacher-name {
+    text-transform: capitalize;
+    font-size: 40px;
+    color: #B0413E;
+
+}
+
+.subject-name {
+    font-size: 25px;
+    color: #FCAA67;
+}
+
+.students-qty {
+    font-size: 20px;
+    color: #548687;
+}
+
+.subject-nav-bar {
+    border-top: 1px solid rgb(174, 171, 171);
+    margin: 30px 0 0 0;
+    padding: 10px 0 0 0;
+    max-width: 100%;
+    overflow: hidden;
+
+}
+
+.nav-bar-section {
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(174, 171, 171);
+}
+
+.active-tab {
+    color: #FB8501;
+    border-bottom: 5px solid #FB8501;
+}
+
+
+.nav-bar-section:hover {
+    color: #FFB703;
+    border-bottom: 5px solid #FFB703;
+}
+
+.subject-code {
+    font-size: 20px;
+    color: black;
+    margin-left: 100px;
+    box-sizing: border-box;
+}
+
+.subject-code-container {
+    /* border: 2px solid #6dea91; */
+    background-color: #91F5AD;
+    border-radius: 5px;
+    margin-top: 50px;
+
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.233);
+}
+
+
+
+.checkbox-container .list {
+    margin-top: 40px;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 20px;
+    width:1200px;
+}
+
+.form-element {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    
+    
+}
+
+.form-element input {
+    display: none;
+}
+
+.form-element label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    cursor: pointer;
+    border: 2px solid #ddd;
+    background: #fff;
+    box-shadow: 0px 5px 20px 2px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 200ms ease-in-out;
+    border-radius: 5px;
+    filter: grayscale(30%);
+}
+
+.form-element .icon {
+    margin-top: 10px;
+    font-size: 30px;
+    color: #555;
+    transition: all 200ms ease-in-out;
+}
+
+.form-element .title {
+    font-size: 18px;
+    color: #555;
+    padding: 5px 0px;
+    transition: all 200ms ease-in-out;
+    z-index:2;
+
+    
+}
+
+.form-element label:before {
+    content: "✓";
+    position: absolute;
+    width: 23px;
+    height: 23px;
+    top: 8px;
+    left: 8px;
+    padding-top:3px;
+    background: #FEC574;
+    color: #fff;
+    text-align: center;
+    line-height: 18px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 200ms ease-in-out;
+    z-index:2;
+}
+
+.form-element input:checked+label:before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.form-element input:checked+label .icon {
+    color: #FE5B78;
+}
+
+.form-element input:checked+label .title {
+    color: #FE5B78;
+    font-weight: 600;
+}
+
+.form-element input:checked+label {
+    border: 2px solid #FE5B78;
+    filter: grayscale(0%);
+}
+
+.top-gradient-card {
+    height: 80px;
+    background: linear-gradient(45deg, #FE5B78, #FEC574);
+}
+
+.student-photo img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+}
+
+
+/* date picker */
+
+[type="date"] {
+    background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
+}
+
+[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+/* custom styles */
+
+input {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 3px 5px;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.date-picker-container{
+    flex-direction: row;
+    gap:30px;
+    justify-content: right;
+}

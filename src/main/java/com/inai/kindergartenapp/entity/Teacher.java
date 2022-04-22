@@ -12,20 +12,20 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
-public class Teacher {
+@AllArgsConstructor
+public class Teacher{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     private String fullname;
-
     private String email;
     private String password;
     private String picture;
 
     @Column(name="account_type")
-    @Builder.Default
-    private String accountType= AccountType.TEACHER.getAccountType();
+    private String accountType;
+
+
 }
