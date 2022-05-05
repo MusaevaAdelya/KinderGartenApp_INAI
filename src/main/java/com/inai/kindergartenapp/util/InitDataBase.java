@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,9 +15,10 @@ import java.util.Random;
 @Configuration
 public class InitDataBase {
     @Bean
-    CommandLineRunner initData(DirectorRepository directorRepository, TeacherRepository teacherRepository, StudentRepository studentRepository, SubjectRepository subjectRepository, GradeRepository gradeRepository) {
+    CommandLineRunner initData(DirectorRepository directorRepository, TeacherRepository teacherRepository, StudentRepository studentRepository, SubjectRepository subjectRepository, GradeRepository gradeRepository, AttendanceRepository attendanceRepository) {
         return args -> {
             gradeRepository.deleteAll();
+            attendanceRepository.deleteAll();
             subjectRepository.deleteAll();
             directorRepository.deleteAll();
             teacherRepository.deleteAll();
@@ -121,11 +123,43 @@ public class InitDataBase {
                 }
             }
 
+            List<Attendance> attendances=new ArrayList<>();
+
+            for(Subject subject:subjects){
+                for(int i=0;i<=7;i++){
+                    List<Student> presentStudents=new ArrayList<>();
+                    List<Student> absentStudents=new ArrayList<>();
+
+                    for(Student student:subject.getStudents()){
+                        if(rnd.nextInt(2)==1){
+                            presentStudents.add(student);
+                        }else{
+                            absentStudents.add(student);
+                        }
+
+                    }
+                    attendances.add(Attendance.builder()
+                                    .date(LocalDate.now().minusDays(i))
+                                    .students(presentStudents)
+                                    .present(true)
+                                    .subject(subject)
+                            .build());
+
+                    attendances.add(Attendance.builder()
+                            .date(LocalDate.now().minusDays(i))
+                            .students(absentStudents)
+                            .present(false)
+                            .subject(subject)
+                            .build());
+                }
+            }
+
 
             studentRepository.saveAll(students);
             teacherRepository.saveAll(teachers);
             subjectRepository.saveAll(subjects);
             gradeRepository.saveAll(grades);
+            attendanceRepository.saveAll(attendances);
         };
 
 
