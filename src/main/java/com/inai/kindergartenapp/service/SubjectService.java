@@ -34,4 +34,12 @@ public class SubjectService {
     public Subject findById(Long subjectId) {
         return subjectRepository.findById(subjectId).orElseThrow();
     }
+
+    public String getSubjectName(String subject) {
+        if(subject.equals("all")){
+            return "All Subjects";
+        }else{
+            return subjectRepository.findById(Long.valueOf(subject)).orElseThrow().getName();
+        }
+    }
 }

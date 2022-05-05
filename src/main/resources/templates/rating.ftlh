@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/subject_info.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -13,7 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    
+
+    <link rel="stylesheet" href="/css/rating.css">
     <title>KinderGarten</title>
 </head>
 <body >
@@ -25,17 +25,17 @@
         <div class="profile">
             <img src="/avatars/${user.picture}" alt="">
             <h3>${user.fullname}</h3>
-            <p>${user.accountType}</p>
+            <p>${user.accountType?capitalize}</p>
         </div>
         <ul class="nav-list">
-            <li class="active">
-                <a href="#">
+            <li >
+                <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/subjects">
                     <i class="bi bi-book-half"></i>
                     <span class="links_name">Subjects</span>
                 </a>
             </li>
-            <li>
-                <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/rating">
+            <li class="active">
+                <a href="#">
                     <i class="bi bi-trophy-fill"></i>
                     <span class="links_name">Rating</span>
                 </a>
@@ -67,62 +67,59 @@
         </ul>
     </div>
 
-    <section class="main-section mb-0 pb-0">
-        <div class="header">
-        </div>
-        <div class="container">
-            <div class="header-info ">
-                <div class="main-info">
-                    <div class="teacher-photo">
-                        <img src="/avatars/${subject.teacher.picture}" alt="professor's photo">
-                    </div>
-                    <div class="main-info-text">
-                        <p class="teacher-name mb-0">${subject.teacher.fullname}</p>
-                        <p class="subject-name mb-0">
-                            <i class='bx bxs-book me-2'></i>${subject.name}
-                        </p>
-                        <p class="students-qty"><i class="bi bi-people-fill me-2"></i>${subject.students?size} students</p>
-                    </div>
-                    <div class="subject-code">
-                        <div class="subject-code-container">
-                            <p class="m-2">${subject.code}</p>
-                        </div>
+    <section class="main-section mb-0 pb-0 pt-4 px-5">
+
+        <div class="d-flex justify-content-between px-5">
+            <form action="/kindergarten/${user.accountType}/${user.email}/rating" method="GET" role="form"  class="d-flex flex-row">
+                <div class="subject-selector ">
+                    <div class="custom-select" style="font-size: large;">
+                        <select name="subject" required>
+                            <option value="">Select a Subject:</option>
+                            <option value="all">All Subjects</option>
+                            <#list subjects as subject>
+                                <option value="${subject.id}">${subject.name}</option>
+                            </#list>
+
+                        </select>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="subject-nav-bar" >
-            <div class="row text-center">
-                <div class="col nav-bar-section active-page">Students</div>
-                <div class="col nav-bar-section ">Attendance</div>
-                <div class="col nav-bar-section ">Grades</div>
-                <div class="col nav-bar-section">Homework</div>
-            </div>
-        </div>
-        <div class="students-sector m-0 p-0">
-            <div class="students-cards mt-5 mx-5 mb-0">
-                <div class="row row-cols-4">
-                    <#list grades as grade>
-                        <div class="col mb-4">
-                            <div class="card border border-3 student-card-style">
-                                <div class="card-body m-0 p-0 ">
-                                    <div class="top-gradient-card rounded-top position-relative p-0 m-0">
-                                        <div class="student-photo position-absolute top-100 start-50 translate-middle" >
-                                            <img src="/avatars/${grade.student.picture}" alt="student photo">
-                                        </div>
-                                    </div>
-                                    <div class="card-text mt-5 pt-3 pb-3 text-center">
-                                        <p class="student-name mb-2 fs-5">${grade.student.fullname}</p>
-                                        <p class="student-grades"><i class="bi bi-star-fill text-warning"></i> ${grade.getAverageGrade()?string["0.0"]}</p>
-                                    </div>
+                <div class="submit-button ps-5">
+                    <button type="submit" class="btn ms-3 py-2" style="font-size: large;" >Submit</button>
 
+                </div>
+            </form>
+
+            <div class="text-center align-self-center text-white rounded px-3" style="font-size: 20px; background-color: #6F88FC; min-width: 300px">
+                <i class="bi bi-chevron-bar-right fs-3 pe-3"></i>${currentSubject?capitalize}
+            </div>
+
+            <div class="reverse-sort-btn text-end" id="reverse-sort">
+                <button type="button" class="btn  rounded-circle me-3 bi bi-arrow-down-up " style="font-size: x-large;" ></button>
+            </div>
+
+        </div>
+
+        <div class="students-cards pt-5  mb-0">
+            <div class="row row-cols-lg-4 row-cols-2" id="students">
+                <#list grades as g>
+                    <div class="col mb-4" >
+                        <div class="card border border-3 student-card-style">
+                            <div class="card-body m-0 p-0 ">
+                                <div class="top-gradient-card rounded-top position-relative p-0 m-0">
+                                    <div class="student-photo position-absolute top-100 start-50 translate-middle" >
+                                        <img src="/avatars/${g.student.picture}" alt="student photo">
+                                    </div>
                                 </div>
+                                <div class="card-text mt-5 pt-3 pb-3 text-center">
+                                    <p class="student-name mb-2 fs-5">${g.student.fullname}</p>
+                                    <p class="student-grades"><i class="bi bi-star-fill text-warning"></i>${g.grade?string["0.0"]}</p>
+                                </div>
+
                             </div>
                         </div>
-                    </#list>
+                    </div>
+                </#list>
 
-
-                </div>
             </div>
         </div>
 
@@ -130,7 +127,7 @@
 
 
 
-    <script type="text/javascript" src="/js/sidebar.js"></script>
+    <script type="text/javascript" src="/js/rating.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>

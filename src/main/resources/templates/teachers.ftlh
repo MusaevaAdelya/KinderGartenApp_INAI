@@ -36,7 +36,7 @@
                 </a>
             </li>
             <li >
-                <a href="#">
+                <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/rating">
                     <i class="bi bi-trophy-fill"></i>
                     <span class="links_name">Rating</span>
                 </a>

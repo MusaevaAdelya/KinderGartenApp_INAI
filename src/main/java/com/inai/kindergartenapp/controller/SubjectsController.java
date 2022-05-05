@@ -16,19 +16,18 @@ import org.springframework.web.bind.annotation.*;
 public class SubjectsController {
     private final SubjectService subjectService;
     private final DirectorService directorService;
-    private final StudentService studentSerivice;
+    private final StudentService studentService;
     private final TeacherService teacherService;
     private final GradeService gradeService;
 
     @GetMapping
     public String allSubjects(@PathVariable("accountType")String accountType ,@PathVariable("userEmail") String userEmail, Model model){
-        model.addAttribute("subjects",subjectService.getSubjectsDto());
         model.addAttribute("teachers",teacherService.getAllTeachers());
-
+        model.addAttribute("subjects",subjectService.getSubjectsDto());
         if(accountType.equals(AccountType.DIRECTOR.getAccountType().toLowerCase())){
             model.addAttribute("user", directorService.findByEmail(userEmail));
         }else if(accountType.equals(AccountType.STUDENT.getAccountType().toLowerCase())){
-            model.addAttribute("user", studentSerivice.findByEmail(userEmail));
+            model.addAttribute("user", studentService.findByEmail(userEmail));
         }else if(accountType.equals(AccountType.TEACHER.getAccountType().toLowerCase())){
             model.addAttribute("user", teacherService.findByEmail(userEmail));
         }
@@ -53,7 +52,7 @@ public class SubjectsController {
         if(accountType.equals(AccountType.DIRECTOR.getAccountType().toLowerCase())){
             model.addAttribute("user", directorService.findByEmail(userEmail));
         }else if(accountType.equals(AccountType.STUDENT.getAccountType().toLowerCase())){
-            model.addAttribute("user", studentSerivice.findByEmail(userEmail));
+            model.addAttribute("user", studentService.findByEmail(userEmail));
         }else if(accountType.equals(AccountType.TEACHER.getAccountType().toLowerCase())){
             model.addAttribute("user", teacherService.findByEmail(userEmail));
         }

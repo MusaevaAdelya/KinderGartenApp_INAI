@@ -201,6 +201,8 @@
 
 }
 
+
+
 .main-section {
     position: relative;
     background: #E4E9F7;
@@ -323,6 +325,9 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
+
+
+
 .display-none{
     display:none;
 }
@@ -347,3 +352,15 @@
     background-color: #e03e46 !important;
     color:white;
 }
+
+/*.subject-title{*/
+/*    font-size: 20px;*/
+/*    background-color: #6F88FC;*/
+/*    border-radius: 5px;*/
+/*    color:white;*/
+/*    min-width: 400px;*/
+/*    display : flex;*/
+/*    align-items : center;*/
+/*    justify-content : center;*/
+/*}*/
+

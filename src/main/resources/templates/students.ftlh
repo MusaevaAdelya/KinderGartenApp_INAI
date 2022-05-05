@@ -36,7 +36,7 @@
                 </a>
             </li>
             <li >
-                <a href="#">
+                <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/rating">
                     <i class="bi bi-trophy-fill"></i>
                     <span class="links_name">Rating</span>
                 </a>
@@ -86,6 +86,7 @@
 
         <div class="students-cards pt-5  mb-0">
             <div class="row row-cols-lg-4 row-cols-2" id="students">
+
                 <#list grades as key,value>
                     <div class="col mb-4" >
                         <div class="card border border-3 student-card-style ">
