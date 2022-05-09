@@ -13,4 +13,8 @@ public interface GradeRepository extends CrudRepository<Grade,Long> {
     List<Grade> getAllByStudent(Student student);
 
     Void deleteAllBySubject(Subject subject);
+
+    Grade findByStudentAndSubject(Student student,Subject subject);
+
+    List<Grade> getAllBySubjectOrderByStudentFullname(Subject subject);
 }

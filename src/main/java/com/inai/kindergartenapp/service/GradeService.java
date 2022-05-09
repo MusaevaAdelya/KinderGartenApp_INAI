@@ -9,6 +9,7 @@ import com.inai.kindergartenapp.entity.Student;
 import com.inai.kindergartenapp.entity.Subject;
 import com.inai.kindergartenapp.repository.GradeRepository;
 import com.inai.kindergartenapp.repository.StudentRepository;
+import com.inai.kindergartenapp.repository.SubjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +23,17 @@ public class GradeService {
     private final SubjectService subjectService;
     private final StudentRepository studentRepository;
     private final StudentService studentService;
+    private final SubjectRepository subjectRepository;
+
 
 
 
     public List<GradeDto> getBySubject(Subject subject) {
         return gradeRepository.getAllBySubject(subject).stream().map(g -> GradeDto.from(g)).collect(Collectors.toList());
+    }
+
+    public List<GradeDto> getBySubjectOrdered(Subject subject) {
+        return gradeRepository.getAllBySubjectOrderByStudentFullname(subject).stream().map(g -> GradeDto.from(g)).collect(Collectors.toList());
     }
 
 
@@ -82,4 +89,15 @@ public class GradeService {
     }
 
 
+    public void editGrades(Long studentId, ArrayList<Integer> grades, Long subjectId) {
+        Subject subject=subjectRepository.findById(subjectId).orElseThrow();
+        Student student=studentRepository.findById(studentId).orElseThrow();
+        Grade grade=gradeRepository.findByStudentAndSubject(student,subject);
+
+        grade.setFirstGrade(grades.get(0));
+        grade.setSecondGrade(grades.get(1));
+        grade.setThirdGrade(grades.get(2));
+
+        gradeRepository.save(grade);
+    }
 }

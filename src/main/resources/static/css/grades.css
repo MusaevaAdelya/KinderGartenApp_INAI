@@ -373,14 +373,19 @@
 
 
 .grade-input{
-    width: 100px;
+    width: 85px;
     border-bottom:3px solid #A192A7;
     border-top: transparent;
     border-left: transparent;
     border-right: transparent;
     background-color: transparent;
     outline: white;
+    color:#297bad;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
 }
+
 
 .grade-input:focus{
     border:4px solid #A192A7;
