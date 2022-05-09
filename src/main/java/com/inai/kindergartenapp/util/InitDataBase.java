@@ -3,6 +3,8 @@ package com.inai.kindergartenapp.util;
 import com.inai.kindergartenapp.entity.*;
 import com.inai.kindergartenapp.enums.AccountType;
 import com.inai.kindergartenapp.repository.*;
+import com.thedeanda.lorem.Lorem;
+import com.thedeanda.lorem.LoremIpsum;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +17,9 @@ import java.util.Random;
 @Configuration
 public class InitDataBase {
     @Bean
-    CommandLineRunner initData(DirectorRepository directorRepository, TeacherRepository teacherRepository, StudentRepository studentRepository, SubjectRepository subjectRepository, GradeRepository gradeRepository, AttendanceRepository attendanceRepository) {
+    CommandLineRunner initData(DirectorRepository directorRepository, TeacherRepository teacherRepository, StudentRepository studentRepository, SubjectRepository subjectRepository, GradeRepository gradeRepository, AttendanceRepository attendanceRepository, HomeworkRepository homeworkRepository) {
         return args -> {
+            homeworkRepository.deleteAll();
             gradeRepository.deleteAll();
             attendanceRepository.deleteAll();
             subjectRepository.deleteAll();
@@ -26,6 +29,7 @@ public class InitDataBase {
 
 
             Random rnd = new Random();
+            Lorem lorem = LoremIpsum.getInstance();
 
             directorRepository.save(Director.builder()
                     .fullname("Albus Dumbledore")
@@ -126,7 +130,7 @@ public class InitDataBase {
             List<Attendance> attendances=new ArrayList<>();
 
             for(Subject subject:subjects){
-                for(int i=0;i<=7;i++){
+                for(int i=0;i<LocalDate.now().getDayOfMonth();i++){
                     List<Student> presentStudents=new ArrayList<>();
                     List<Student> absentStudents=new ArrayList<>();
 
@@ -154,12 +158,26 @@ public class InitDataBase {
                 }
             }
 
+            List<Homework> homeworks=new ArrayList<>();
+
+            for(Subject subject:subjects){
+                for(int i=0;i<LocalDate.now().getDayOfMonth();i++){
+                    for(int j=0;j<(rnd.nextInt(10)+1);j++){
+                        homeworks.add(Homework.builder()
+                                        .subject(subject)
+                                        .date(LocalDate.now().minusDays(i))
+                                        .task(lorem.getWords(5,20))
+                                .build());
+                    }
+                }
+            }
 
             studentRepository.saveAll(students);
             teacherRepository.saveAll(teachers);
             subjectRepository.saveAll(subjects);
             gradeRepository.saveAll(grades);
             attendanceRepository.saveAll(attendances);
+            homeworkRepository.saveAll(homeworks);
         };
 
 
