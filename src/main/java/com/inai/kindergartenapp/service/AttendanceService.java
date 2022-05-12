@@ -99,13 +99,7 @@ public class AttendanceService {
             attendanceRepository.save(attendanceAbsent);
     }
 
-    public String getDate(String date) {
-        if(date==null){
-            return String.valueOf(LocalDate.now());
-        }else{
-            return date;
-        }
-    }
+
 
     public boolean checkDate(LocalDate userDate){
         if(userDate.isBefore(formatDate("2022-05-01")) || userDate.isAfter(LocalDate.now().plusDays(7))){

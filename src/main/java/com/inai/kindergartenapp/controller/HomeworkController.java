@@ -18,6 +18,7 @@ public class HomeworkController {
     private final TeacherService teacherService;
     private final SubjectService subjectService;
     private final HomeworkService homeworkService;
+    private final MainService mainService;
 
     @GetMapping
     public String getHomeworkPage(@PathVariable("accountType")String accountType ,
@@ -28,6 +29,8 @@ public class HomeworkController {
         model.addAttribute("homeworks", homeworkService.getHomeworks(subjectId,date));
 
         model.addAttribute("subject", SubjectDto.from(subjectService.findById(subjectId)));
+
+        model.addAttribute("homework_date", mainService.getDate(date));
 
 
         if(accountType.equals(AccountType.DIRECTOR.getAccountType().toLowerCase())){

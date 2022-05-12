@@ -71,7 +71,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header modal-header-style">
-                    <h5 class="modal-title text-white" id="staticBackdropLabel">${homeworks[0].date}</h5>
+                    <h5 class="modal-title text-white" id="staticBackdropLabel">${homework_date}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-body-style">
@@ -84,7 +84,7 @@
                         <div class="col-auto col-8">
                             <input name="taskDescription"  type="text" id="inputTask" class="form-control input-bar text-start"
                                 aria-describedby="passwordHelpInline">
-                            <input name="newTaskDate" value="${homeworks[0].date}" hidden>
+                            <input name="newTaskDate" value="${homework_date}" hidden>
 
                         </div>
                     </div>
@@ -137,7 +137,7 @@
         <div class="container mt-4 px-5">
     
             <form action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id}" method="get" role="form" class="date-picker-container d-flex w-100 mb-4">
-                <input type="date" name="date" value="${homeworks[0].date}" min="2022-05-01" max="${.now?date}">
+                <input type="date" name="date" value="${homework_date}" min="2022-05-01" max="${.now?date}">
                 <button type="sumbit" class="btn submit-date-btn">Submit</button>
                 <button type="button" class="btn rounded-circle add-task-btn" data-bs-toggle="modal"
                     data-bs-target="#addNewTask"><i class="bi bi-plus-lg"></i></button>
@@ -145,17 +145,19 @@
     
             <div class="list-type w-100">
                 <ol>
-                    <#list homeworks as homework>
-                        <form method="post" action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id}/delete_task" role="form">
-                            <li class="d-flex flex-row ">
-                                <p class="flex-fill">${homework.task}</p>
-                                <input name="deleteTaskId" value="${homework.id}" hidden>
-                                <input name="newTaskDate" value="${homeworks[0].date}" hidden>
-                                <button type="submit" class="btn btn-danger delete-homework-btn ms-4 rounded-0"><i
-                                        class="bi bi-trash-fill text-white"></i></button>
-                            </li>
-                        </form>
-                    </#list>
+                    <#if homeworks??>
+                        <#list homeworks as homework>
+                            <form method="post" action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id}/delete_task" role="form">
+                                <li class="d-flex flex-row ">
+                                    <p class="flex-fill">${homework.task}</p>
+                                    <input name="deleteTaskId" value="${homework.id?c}" hidden>
+                                    <input name="newTaskDate" value="${homework.date}" hidden>
+                                    <button type="submit" class="btn btn-danger delete-homework-btn ms-4 rounded-0"><i
+                                            class="bi bi-trash-fill text-white"></i></button>
+                                </li>
+                            </form>
+                        </#list>
+                    </#if>
                 </ol>
             </div>
             

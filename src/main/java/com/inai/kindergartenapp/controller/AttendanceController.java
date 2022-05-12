@@ -21,6 +21,7 @@ public class AttendanceController {
     private final TeacherService teacherService;
     private final SubjectService subjectService;
     private final AttendanceService attendanceService;
+    private final MainService mainService;
 
     @GetMapping
     public String attendance(@PathVariable("accountType")String accountType ,
@@ -30,7 +31,7 @@ public class AttendanceController {
 
         model.addAttribute("present",attendanceService.getPresentStudents(date,subjectId));
         model.addAttribute("absent",attendanceService.getAbsentStudents(date,subjectId));
-        model.addAttribute("attendance_date", attendanceService.getDate(date));
+        model.addAttribute("attendance_date", mainService.getDate(date));
 
 
         Subject subject=subjectService.findById(Long.valueOf(subjectId));
