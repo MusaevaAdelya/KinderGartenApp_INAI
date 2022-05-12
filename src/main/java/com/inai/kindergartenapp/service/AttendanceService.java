@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,14 +31,25 @@ public class AttendanceService {
         if(dateString==null){
             date=LocalDate.now();
         }else{
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            date = LocalDate.parse(dateString, formatter);
+            date = formatDate(dateString);
         }
 
-        Subject subject=subjectRepository.findById(subjectId).orElseThrow();
+        if(checkDate(date)){
+            Subject subject=subjectRepository.findById(subjectId).orElseThrow();
+            Attendance attendance;
 
+            try{
+                attendance=attendanceRepository.findByDateAndSubjectAndPresent(date,subject,true);
+            }catch(NoSuchElementException ex){
+                return null;
+            }
 
-        return AttendanceDto.from(attendanceRepository.findByDateAndSubjectAndPresent(date,subject,true));
+            return AttendanceDto.from(attendance);
+
+        }else{
+            return null;
+        }
+
 
     }
 
@@ -47,13 +59,16 @@ public class AttendanceService {
         if(dateString==null){
             date=LocalDate.now();
         }else{
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            date = LocalDate.parse(dateString, formatter);
+            date = formatDate(dateString);
         }
 
-        Subject subject=subjectRepository.findById(subjectId).orElseThrow();
+        if(checkDate(date)){
+            Subject subject=subjectRepository.findById(subjectId).orElseThrow();
+            return AttendanceDto.from(attendanceRepository.findByDateAndSubjectAndPresent(date,subject,false));
+        }else{
+            return null;
+        }
 
-        return AttendanceDto.from(attendanceRepository.findByDateAndSubjectAndPresent(date,subject,false));
     }
 
     public void takeAttendance(ArrayList<Long> presentStudentsId, String attendanceDateString, Long subjectId) {
@@ -71,8 +86,7 @@ public class AttendanceService {
                  }
              }
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate attendanceDate = LocalDate.parse(attendanceDateString, formatter);
+            LocalDate attendanceDate = formatDate(attendanceDateString);
 
             Attendance attendancePresent=attendanceRepository.findByDateAndSubjectAndPresent(attendanceDate,subject,true);
             attendancePresent.setStudents(presentStudents);
@@ -84,4 +98,27 @@ public class AttendanceService {
             attendanceRepository.save(attendancePresent);
             attendanceRepository.save(attendanceAbsent);
     }
+
+    public String getDate(String date) {
+        if(date==null){
+            return String.valueOf(LocalDate.now());
+        }else{
+            return date;
+        }
+    }
+
+    public boolean checkDate(LocalDate userDate){
+        if(userDate.isBefore(formatDate("2022-05-01")) || userDate.isAfter(LocalDate.now().plusDays(7))){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public LocalDate formatDate(String stringDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return LocalDate.parse(stringDate, formatter);
+    }
+
+
 }

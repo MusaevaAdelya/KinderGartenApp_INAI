@@ -156,13 +156,22 @@ public class InitDataBase {
                             .subject(subject)
                             .build());
                 }
+
+                for(int i=1;i<=LocalDate.now().plusDays(7).getDayOfMonth();i++){
+                    attendances.add(Attendance.builder()
+                            .date(LocalDate.now().plusDays(i))
+                            .students(subject.getStudents())
+                                    .present(false)
+                                    .subject(subject)
+                            .build());
+                }
             }
 
             List<Homework> homeworks=new ArrayList<>();
 
             for(Subject subject:subjects){
                 for(int i=0;i<LocalDate.now().getDayOfMonth();i++){
-                    for(int j=0;j<(rnd.nextInt(10)+1);j++){
+                    for(int j=0;j<(rnd.nextInt(5)+5);j++){
                         homeworks.add(Homework.builder()
                                         .subject(subject)
                                         .date(LocalDate.now().minusDays(i))

@@ -102,7 +102,7 @@
         <div class="container">
 
             <form action="/kindergarten/${user.accountType}/${user.email}/subjects/attendance/${subject.id}" method="get" role="form" class="date-picker-container d-flex w-100 mt-5">
-                <input type="date" name="date" id="dateInput"  value="${present.date}">
+                <input id="datefield"  type="date" name="date" id="dateInput"  value="${attendance_date}" min="2022-05-01">
                 <button type="submit" class="btn btn-info " id="dateSubmitButton">Submit</button>
                 <button type="button" class="btn btn-warning rounded-circle "  id="editButton"><i class="bi bi-pencil-fill "></i></button>
             </form>
@@ -111,73 +111,77 @@
                 <form action="/kindergarten/${user.accountType}/${user.email}/subjects/attendance/${subject.id}/check" method="post" role="form">
                     <div class="list" id="studentList">
 
-                        <input type="date" name="attendanceDate" value="${present.date}" hidden>
-                        <#list present.students as student>
-                            <div class="form-element checkbox display-none">
-                                <input type="checkbox" name="presentStudents" value="${student.id}" id="student_${student.id}" class="p-0 m-0" checked>
-                                <label for="student_${student.id}" class="student-card-style">
+                        <input type="date" name="attendanceDate" value="${attendance_date}" hidden>
+                        <#if present??>
+                            <#list present.students as student>
+                                <div class="form-element checkbox display-none m-2">
+                                    <input type="checkbox" name="presentStudents" value="${student.id}" id="student_${student.id}" class="p-0 m-0" checked>
+                                    <label for="student_${student.id}" class="student-card-style">
 
-                                    <div class="color-change rounded-top position-relative p-0 m-0">
-                                        <div class="student-photo position-absolute top-100 start-50 translate-middle">
-                                            <img src="/avatars/${student.picture}" alt="student photo">
+                                        <div class="color-change rounded-top position-relative p-0 m-0">
+                                            <div class="student-photo position-absolute top-100 start-50 translate-middle">
+                                                <img src="/avatars/${student.picture}" alt="student photo">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="title position-absolute bottom-0 start-50 translate-middle-x pb-3 w-100">
-                                        ${student.fullname}
-                                    </div>
-
-                                </label>
-                            </div>
-
-                            <div class="form-element">
-                                <div class="student-card-style">
-                                    <div class="color-present rounded-top position-relative p-0 m-0">
-                                        <div class="student-photo position-absolute top-100 start-50 translate-middle">
-                                            <img src="/avatars/${student.picture}" alt="student photo">
+                                        <div class="title position-absolute bottom-0 start-50 translate-middle-x pb-3 w-100">
+                                            ${student.fullname}
                                         </div>
-                                    </div>
-                                    <div class="title position-absolute bottom-0 start-50 translate-middle-x pb-3 w-100">
-                                        ${student.fullname}
-                                    </div>
 
+                                    </label>
                                 </div>
-                            </div>
-                        </#list>
 
-                        <#list absent.students as student>
-                            <div class="form-element checkbox display-none">
-                                <input type="checkbox" name="presentStudents" value="${student.id}" id="student_${student.id}" class="p-0 m-0">
-                                <label for="student_${student.id}" class="student-card-style">
-
-                                    <div class="color-change rounded-top position-relative p-0 m-0">
-                                        <div class="student-photo position-absolute top-100 start-50 translate-middle">
-                                            <img src="/avatars/${student.picture}" alt="student photo">
+                                <div class="form-element m-2">
+                                    <div class="student-card-style">
+                                        <div class="color-present rounded-top position-relative p-0 m-0">
+                                            <div class="student-photo position-absolute top-100 start-50 translate-middle">
+                                                <img src="/avatars/${student.picture}" alt="student photo">
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="title position-absolute bottom-0 start-50 translate-middle-x pb-3 w-100">
-                                        ${student.fullname}
-                                    </div>
-
-                                </label>
-                            </div>
-
-                            <div class="form-element">
-                                <div class="student-card-style">
-
-                                    <div class="color-absent rounded-top position-relative p-0 m-0">
-                                        <div class="student-photo position-absolute top-100 start-50 translate-middle">
-                                            <img src="/avatars/${student.picture}" alt="student photo">
+                                        <div class="title position-absolute bottom-0 start-50 translate-middle-x pb-3 w-100">
+                                            ${student.fullname}
                                         </div>
-                                    </div>
-                                    <div class="title position-absolute bottom-0 start-50 translate-middle-x pb-3 w-100">
-                                        ${student.fullname}
-                                    </div>
 
+                                    </div>
                                 </div>
-                            </div>
+                            </#list>
+                        </#if>
 
-                        </#list>
+                        <#if absent??>
+                            <#list absent.students as student>
+                                <div class="form-element checkbox display-none m-2">
+                                    <input type="checkbox" name="presentStudents" value="${student.id}" id="student_${student.id}" class="p-0 m-0">
+                                    <label for="student_${student.id}" class="student-card-style">
+
+                                        <div class="color-change rounded-top position-relative p-0 m-0">
+                                            <div class="student-photo position-absolute top-100 start-50 translate-middle">
+                                                <img src="/avatars/${student.picture}" alt="student photo">
+                                            </div>
+                                        </div>
+
+                                        <div class="title position-absolute bottom-0 start-50 translate-middle-x pb-3 w-100">
+                                            ${student.fullname}
+                                        </div>
+
+                                    </label>
+                                </div>
+
+                                <div class="form-element m-2">
+                                    <div class="student-card-style">
+
+                                        <div class="color-absent rounded-top position-relative p-0 m-0">
+                                            <div class="student-photo position-absolute top-100 start-50 translate-middle">
+                                                <img src="/avatars/${student.picture}" alt="student photo">
+                                            </div>
+                                        </div>
+                                        <div class="title position-absolute bottom-0 start-50 translate-middle-x pb-3 w-100">
+                                            ${student.fullname}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </#list>
+                        </#if>
 
 
                     </div>

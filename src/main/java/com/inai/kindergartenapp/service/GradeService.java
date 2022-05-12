@@ -22,10 +22,7 @@ public class GradeService {
     private final GradeRepository gradeRepository;
     private final SubjectService subjectService;
     private final StudentRepository studentRepository;
-    private final StudentService studentService;
     private final SubjectRepository subjectRepository;
-
-
 
 
     public List<GradeDto> getBySubject(Subject subject) {

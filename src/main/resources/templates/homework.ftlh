@@ -66,24 +66,26 @@
     </div>
 
     <!-- Modal Window -->
-    <div class="modal fade" id="addNewSubject" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <form method="post" action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id}/new_task" role="form"  class="modal fade" id="addNewTask" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header modal-header-style">
-                    <h5 class="modal-title text-white" id="staticBackdropLabel">Here will be task date</h5>
+                    <h5 class="modal-title text-white" id="staticBackdropLabel">${homeworks[0].date}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-body-style">
 
                     <div class="row g-3 align-items-center mb-4 mt-3">
                         <div class="col-auto">
-                            <label for="inputPassword6"
-                                class="col-form-label  modal-form-title-style">Description</label>
+                            <label for="inputTask"
+                                class="col-form-label  modal-form-title-style">New task</label>
                         </div>
                         <div class="col-auto col-8">
-                            <input type="text" id="inputPassword6" class="form-control input-bar text-start"
+                            <input name="taskDescription"  type="text" id="inputTask" class="form-control input-bar text-start"
                                 aria-describedby="passwordHelpInline">
+                            <input name="newTaskDate" value="${homeworks[0].date}" hidden>
+
                         </div>
                     </div>
 
@@ -91,11 +93,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn submit-btn modal-submit-btn-style text-white">Submit</button>
+                    <button type="submit" class="btn submit-btn modal-submit-btn-style text-white">Submit</button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <div class="main-section">
 
@@ -134,32 +136,26 @@
     
         <div class="container mt-4 px-5">
     
-            <div class="date-picker-container d-flex w-100 mb-4">
-                <input type="date" name="dateofbirth">
-                <button type="button" class="btn submit-date-btn">Submit</button>
+            <form action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id}" method="get" role="form" class="date-picker-container d-flex w-100 mb-4">
+                <input type="date" name="date" value="${homeworks[0].date}" min="2022-05-01" max="${.now?date}">
+                <button type="sumbit" class="btn submit-date-btn">Submit</button>
                 <button type="button" class="btn rounded-circle add-task-btn" data-bs-toggle="modal"
-                    data-bs-target="#addNewSubject"><i class="bi bi-plus-lg"></i></button>
-            </div>
-    
-            
+                    data-bs-target="#addNewTask"><i class="bi bi-plus-lg"></i></button>
+            </form>
     
             <div class="list-type w-100">
                 <ol>
-                    <li class="d-flex flex-row ">
-                        <p class="flex-fill">Formget Online Form Builder Create Online Forms</p>
-                        <button type="button" class="btn btn-danger delete-homework-btn ms-4 rounded-0"><i
-                                class="bi bi-trash-fill text-white"></i></button>
-                    </li>
-                    <li class="d-flex flex-row ">
-                        <p class="flex-fill">Formget Online Form Builder Create Online Forms</p>
-                        <button type="button" class="btn btn-danger delete-homework-btn ms-4 rounded-0"><i
-                                class="bi bi-trash-fill text-white"></i></button>
-                    </li>
-                    <li class="d-flex flex-row ">
-                        <p class="flex-fill">Formget Online Form Builder Create Online Forms</p>
-                        <button type="button" class="btn btn-danger delete-homework-btn ms-4 rounded-0"><i
-                                class="bi bi-trash-fill text-white"></i></button>
-                    </li>
+                    <#list homeworks as homework>
+                        <form method="post" action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id}/delete_task" role="form">
+                            <li class="d-flex flex-row ">
+                                <p class="flex-fill">${homework.task}</p>
+                                <input name="deleteTaskId" value="${homework.id}" hidden>
+                                <input name="newTaskDate" value="${homeworks[0].date}" hidden>
+                                <button type="submit" class="btn btn-danger delete-homework-btn ms-4 rounded-0"><i
+                                        class="bi bi-trash-fill text-white"></i></button>
+                            </li>
+                        </form>
+                    </#list>
                 </ol>
             </div>
             

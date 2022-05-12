@@ -21,7 +21,7 @@ public class GradeController {
     private final GradeService gradeService;
 
     @GetMapping
-    public String attendance(@PathVariable("accountType")String accountType ,
+    public String getGradesPage(@PathVariable("accountType")String accountType ,
                              @PathVariable("userEmail") String userEmail,
                              @PathVariable("subjectId")Long subjectId, Model model){
 
@@ -41,7 +41,7 @@ public class GradeController {
     }
 
     @PostMapping("/edit")
-    public String takeAttendance(@RequestParam ArrayList<Integer> grade, @RequestParam Long studentId, @PathVariable("accountType")String accountType , @PathVariable("userEmail") String userEmail, @PathVariable("subjectId")Long subjectId){
+    public String editGrades(@RequestParam ArrayList<Integer> grade, @RequestParam Long studentId, @PathVariable("accountType")String accountType , @PathVariable("userEmail") String userEmail, @PathVariable("subjectId")Long subjectId){
         gradeService.editGrades(studentId, grade, subjectId);
         return String.format("redirect:/kindergarten/%s/%s/subjects/grades/%s",accountType.toLowerCase(),userEmail,subjectId);
     }

@@ -30,6 +30,7 @@ public class AttendanceController {
 
         model.addAttribute("present",attendanceService.getPresentStudents(date,subjectId));
         model.addAttribute("absent",attendanceService.getAbsentStudents(date,subjectId));
+        model.addAttribute("attendance_date", attendanceService.getDate(date));
 
 
         Subject subject=subjectService.findById(Long.valueOf(subjectId));
