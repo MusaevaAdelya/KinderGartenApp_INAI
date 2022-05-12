@@ -66,6 +66,62 @@
     </ul>
 </div>
 
+<#list grades as grade>
+    <form action="/kindergarten/${user.accountType}/${user.email}/subjects/grades/${subject.id}/edit" method="post" role="form">
+        <div class="modal fade" id="student_${grade.student.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel_${grade.student.id}" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-info bg-opacity-50 bg-gradient">
+                        <h5 class="modal-title " id="staticBackdropLabel_${grade.student.id}">${grade.student.fullname}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body modal-body-style">
+
+                        <div class="row g-3 align-items-center mb-4 mt-3">
+                            <div class="col-auto">
+                                <label for="input_1_${grade.student.id}" class="col-form-label  modal-form-title-style">1st trimester: </label>
+                            </div>
+                            <div class="col-auto">
+                                <input name="grade" type="number" id="input_1_${grade.student.id}" class="form-control input-bar"
+                                       aria-describedby="passwordHelpInline" min="0" max="10" step="1" value="${grade.firstGrade}">
+                            </div>
+                        </div>
+
+                        <div class="row g-3 align-items-center mb-4 mt-3">
+                            <div class="col-auto">
+                                <label for="input_2_${grade.student.id}" class="col-form-label  modal-form-title-style">2nd trimester: </label>
+                            </div>
+                            <div class="col-auto">
+                                <input name="grade" type="number" id="input_2_${grade.student.id}" class="form-control input-bar"
+                                       aria-describedby="passwordHelpInline" min="0" max="10" step="1" value="${grade.secondGrade}">
+                            </div>
+                        </div>
+
+                        <div class="row g-3 align-items-center mb-4 mt-3">
+                            <div class="col-auto">
+                                <label for="input_3_${grade.student.id}" class="col-form-label  modal-form-title-style">3rd trimester: </label>
+                            </div>
+                            <div class="col-auto">
+                                <input name="grade" type="number" id="input_3_${grade.student.id}" class="form-control input-bar"
+                                       aria-describedby="passwordHelpInline" min="0" max="10" step="1" value="${grade.thirdGrade}">
+                            </div>
+                        </div>
+
+                        <input name="studentId" value="${grade.student.id}" hidden>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="sumbit" class="btn submit-btn bg-info bg-opacity-50">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</#list>
+
 <div class="main-section">
 
     <div class="header">
@@ -107,28 +163,26 @@
         <div class="students-grades-container d-flex w-100 pb-5">
 
             <#list grades as grade>
-                <form action="/kindergarten/${user.accountType}/${user.email}/subjects/grades/${subject.id}/edit" method="post" role="form">
-                    <div class="student-block w-100 d-flex align-items-center flex-row rounded mb-0">
-                        <div class="student-photo-container me-4">
-                            <img src="/avatars/${grade.student.picture}" alt="student photo" class="student-photo-grade">
-                        </div>
-                        <div class=" student-name">
-                            <p class="m-0">
-                                ${grade.student.fullname}
-                            </p>
-                        </div>
-                        <input name="studentId" value="${grade.student.id}" hidden>
-                        <div class="grade-1 me-4"><input name="grade"  type="number" min="0" max="10" step="1"   class="grade-input  " value="${grade.firstGrade}" ></div>
-                        <div class=" grade-2 me-4"><input name="grade" type="number" min="0" max="10" step="1" class="grade-input  " value="${grade.secondGrade}"></div>
-                        <div class=" grade-3"><input name="grade" type="number" min="0" max="10" step="1" class="grade-input " value="${grade.thirdGrade}"></div>
-                        <div class="grade-edit-btn ms-5">
-                            <button type="submit" class="btn shadow-none rounded-circle">
-                                <i class="bi bi-pencil-fill "></i>
-                            </button>
-                        </div>
-
+                <div class="student-block w-100 d-flex align-items-center flex-row rounded mb-0">
+                    <div class="student-photo-container me-4">
+                        <img src="/avatars/${grade.student.picture}" alt="student photo" class="student-photo-grade">
                     </div>
-                </form>
+                    <div class=" student-name">
+                        <p class="m-0">
+                            ${grade.student.fullname}
+                        </p>
+                    </div>
+                    <input name="studentId" value="${grade.student.id}" hidden>
+                    <div class="grade-1 me-4"><input type="text"  class="grade-input  " value="${grade.firstGrade}" readonly></div>
+                    <div class=" grade-2 me-4"><input  type="text" class="grade-input  " value="${grade.secondGrade}" readonly></div>
+                    <div class=" grade-3"><input type="text"  class="grade-input " value="${grade.thirdGrade}" readonly></div>
+                    <div class="grade-edit-btn ms-5">
+                        <button type="button" class="btn shadow-none rounded-circle" data-bs-toggle="modal" data-bs-target="#student_${grade.student.id}">
+                            <i class="bi bi-pencil-fill "></i>
+                        </button>
+                    </div>
+
+                </div>
             </#list>
 
         </div>
