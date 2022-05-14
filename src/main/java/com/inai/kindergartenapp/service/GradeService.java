@@ -1,9 +1,6 @@
 package com.inai.kindergartenapp.service;
 
-import com.inai.kindergartenapp.dto.GradeDto;
-import com.inai.kindergartenapp.dto.RatingDto;
-import com.inai.kindergartenapp.dto.StudentDto;
-import com.inai.kindergartenapp.dto.SubjectDto;
+import com.inai.kindergartenapp.dto.*;
 import com.inai.kindergartenapp.entity.Grade;
 import com.inai.kindergartenapp.entity.Student;
 import com.inai.kindergartenapp.entity.Subject;
@@ -117,5 +114,22 @@ public class GradeService {
 
     }
 
-    
+    public List<AcademicProgressDto> getStudentsAcademicProgress(){
+        List<AcademicProgressDto> result=new ArrayList<>();
+
+        List<Student> students=studentRepository.getAllBy();
+        for(Student student:students){
+            HashMap<SubjectDto,Double> studentsProgress=new HashMap<>();
+            List<Grade> studentsGrades=gradeRepository.getAllByStudent(student);
+            studentsGrades.forEach(sg->studentsProgress.put(SubjectDto.from(sg.getSubject()),sg.getAverageGrade()));
+            result.add(AcademicProgressDto.builder()
+                            .student(StudentDto.from(student))
+                            .progress(studentsProgress)
+                    .build());
+
+        }
+
+        return result;
+
+    }
 }

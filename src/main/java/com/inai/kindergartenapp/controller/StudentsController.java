@@ -23,6 +23,8 @@ public class StudentsController {
     public String allSubjects(@PathVariable("accountType")String accountType , @PathVariable("userEmail") String userEmail, Model model){
         model.addAttribute("grades",studentSerivice.studentGrades());
 
+        model.addAttribute("academicProgress",gradeService.getStudentsAcademicProgress());
+
         if(accountType.equals(AccountType.DIRECTOR.getAccountType().toLowerCase())){
             model.addAttribute("user", directorService.findByEmail(userEmail));
         }else if(accountType.equals(AccountType.STUDENT.getAccountType().toLowerCase())){

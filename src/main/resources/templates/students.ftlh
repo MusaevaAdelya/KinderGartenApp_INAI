@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/students.css">
+    <link rel="stylesheet" href="/css/students.css?version=51">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -84,11 +84,13 @@
             </div>
         </div>
 
+
+
         <div class="students-cards pt-5  mb-0">
             <div class="row row-cols-lg-4 row-cols-2" id="students">
 
                 <#list grades as key,value>
-                    <div class="col mb-4" >
+                    <a class="btn col mb-4" href="#open-modal_${key.id}" style="box-shadow:none;">
                         <div class="card border border-3 student-card-style ">
                             <div class="card-body m-0 p-0 ">
                                 <div class="top-gradient-card rounded-top position-relative p-0 m-0">
@@ -103,13 +105,59 @@
 
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </#list>
 
             </div>
         </div>
 
+        <#list grades as key,value>
+            <div id="open-modal_${key.id}" class="modal-window">
+                <div>
+                    <a href="#" title="Close" class="modal-close bi bi-x-lg " style="font-size:25px"></a>
+                    <div id="piechart_${key.id}" class="d-flex justify-content-center align-items-center"></div>
+                </div>
+            </div>
+        </#list>
+
     </section>
+
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            <#list academicProgress as ap>
+                let data_${ap.student.id} = google.visualization.arrayToDataTable([
+                    ['Subject', 'Academic Progress'],
+                    <#list ap.progress as key,value>
+                        ['${key.name}', ${value?c}],
+                    </#list>
+                ]);
+
+                let options_${ap.student.id} = {'title':'${ap.student.fullname}. Academic Progress',
+                    'width':850, 'height':550,
+                    'legend.alignment':'center',
+                    'fontName':" 'Poppins', san-serif",
+                    'fontSize':18,
+                    'legend.textStyle':{bold: true, italic: true },
+                    'titleTextStyle':{
+                        fontSize: 27,
+                        bold: true
+                    }
+                };
+
+                let chart_${ap.student.id} = new google.visualization.PieChart(document.getElementById('piechart_${ap.student.id}'));
+                chart_${ap.student.id}.draw(data_${ap.student.id}, options_${ap.student.id});
+
+
+            </#list>
+        }
+    </script>
 
 
 
