@@ -13,7 +13,7 @@
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
-    <link rel="stylesheet" href="/css/rating.css">
+    <link rel="stylesheet" href="/css/rating.css?version=51">
     <title>KinderGarten</title>
 </head>
 <body >
@@ -94,7 +94,7 @@
             </div>
 
             <div class="d-flex flex-row">
-                <div class="reverse-sort-btn text-end" id="reverse-sort">
+                <div class="reverse-sort-btn text-end me-5" id="reverse-sort">
                     <button type="button" class="btn  rounded-circle me-3 bi bi-arrow-down-up " style="font-size: x-large;" ></button>
                 </div>
                 <a class="btn bi bi-bar-chart-line-fill chart-button-style " href="#open-modal"></a>
@@ -138,23 +138,21 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script type="text/javascript">
-        // Load google charts
+
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
-        // Draw the chart and set the chart values
+
         function drawChart() {
-            var data = google.visualization.arrayToDataTable([
+            let data = google.visualization.arrayToDataTable([
                 ['Subject', 'Academic Progress'],
-                ['Work', 8],
-                ['Eat', 2],
-                ['TV', 4],
-                ['Gym', 2],
-                ['Sleep', 8]
+                <#list progress as key,value>
+                ['${key.name}', ${value?c}],
+                </#list>
             ]);
 
-            // Optional; add a title and set the width and height of the chart
-            var options = {'title':'My Average Day',
+
+            let options = {'title':'Academic Progress',
                 'width':850, 'height':550,
                 'legend.alignment':'center',
                 'fontName':" 'Poppins', san-serif",
@@ -166,8 +164,8 @@
                 }
             };
 
-            // Display the chart inside the <div> element with id="piechart"
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            let chart = new google.visualization.PieChart(document.getElementById('piechart'));
             chart.draw(data, options);
         }
     </script>

@@ -100,4 +100,22 @@ public class GradeService {
 
         gradeRepository.save(grade);
     }
+
+
+    public HashMap<SubjectDto,Double> getAcademicProgress(){
+        HashMap<SubjectDto,Double> result=new HashMap<>();
+
+        List<Subject> subjects=subjectRepository.getAllBy();
+
+        for(Subject s:subjects){
+            List<Grade> grades=gradeRepository.getAllBySubject(s);
+            Double average=grades.stream().mapToDouble(g->g.getAverageGrade()).sum()/grades.size();
+            result.put(SubjectDto.from(s),average);
+        }
+
+        return result;
+
+    }
+
+    
 }

@@ -26,6 +26,7 @@ public class RatingController {
         model.addAttribute("subjects",subjectService.getSubjectsDto());
         model.addAttribute("grades",gradeService.getRatingGrades(subject));
         model.addAttribute("currentSubject", subjectService.getSubjectName(subject));
+        model.addAttribute("progress",gradeService.getAcademicProgress());
 
         if(accountType.equals(AccountType.DIRECTOR.getAccountType().toLowerCase())){
             model.addAttribute("user", directorService.findByEmail(userEmail));
