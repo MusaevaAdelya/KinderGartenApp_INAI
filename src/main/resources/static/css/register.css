@@ -11,8 +11,8 @@ body {
 
 .wave {
     position: absolute;
-    width:1450px;
-    height:1400px;
+    width:1530px;
+    height:1560px;
     top: -0;
     left: 0;
     z-index: -1;
@@ -109,7 +109,7 @@ form {
     bottom: -2px;
     width: 0%;
     height: 2px;
-    background-color: #38d39f;
+    background-color: #B584F2;
     transition: .4s;
 }
 
@@ -132,7 +132,7 @@ form {
 }
 
 .input-div.focus>.i>i {
-    color: #38d39f;
+    color: #B584F2;
 }
 
 .input-div>div>input {
@@ -164,7 +164,7 @@ a {
 }
 
 a:hover {
-    color: #38d39f;
+    color: #7798F2;
 }
 
 .btn {
@@ -174,7 +174,7 @@ a:hover {
     border-radius: 25px;
     outline: none;
     border: none;
-    background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+    background-image: linear-gradient(to right, #5981F2, #7798F2);
     background-size: 200%;
     font-size: 1.2rem;
     color: #fff;
@@ -229,68 +229,12 @@ a:hover {
     }
 }
 
-/* The container must be positioned relative: */
-.custom-select {
+.account-type-style {
     position: relative;
-    font-family: 'Poppins',
-        sans-serif;
-
-}
-
-.custom-select select {
-    display: none;
-    /*hide original SELECT element: */
-}
-
-.select-selected {
-    background-color: #053C5E;
-}
-
-/* Style the arrow inside the select element: */
-.select-selected:after {
-    position: absolute;
-    content: "";
-    top: 20px;
-    right: 15px;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-color: #fff transparent transparent transparent;
-}
-
-/* Point the arrow upwards when the select box is open (active): */
-.select-selected.select-arrow-active:after {
-    border-color: transparent transparent #fff transparent;
-    top: 7px;
-}
-
-/* style the items (options), including the selected item: */
-.select-items div,
-.select-selected {
-    color: #ffffff;
-    padding: 8px 16px;
-    border: 1px solid transparent;
+    font-family: 'Poppins', sans-serif;
+    width:360px;
     border-radius: 5px;
-    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-    cursor: pointer;
-}
-
-/* Style items (options): */
-.select-items {
-    position: absolute;
-    background-color: #053C5E;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 99;
-}
-
-/* Hide the items when the select box is closed: */
-.select-hide {
-    display: none;
-}
-
-.select-items div:hover,
-.same-as-selected {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #9E99CC;
+    padding:5px 0;
+    color:white;
 }

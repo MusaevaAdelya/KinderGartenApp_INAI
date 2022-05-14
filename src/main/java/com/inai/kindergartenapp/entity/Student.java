@@ -21,7 +21,9 @@ public class Student{
     private String fullname;
     private String email;
     private String password;
-    private String picture;
+
+    @Builder.Default
+    private String picture="anonymous.jpg";
 
     @Column(name="account_type")
     @Builder.Default

@@ -11,7 +11,10 @@ import com.inai.kindergartenapp.repository.StudentRepository;
 import com.inai.kindergartenapp.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,4 +61,30 @@ public class UserService {
         return res;
     }
 
+    public boolean checkNewStudent(Student newStudent) {
+        if(getAllEmails().contains(newStudent.getEmail())){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+
+    public List<String> getAllEmails(){
+        List<String> allEmails=new ArrayList<>();
+
+        allEmails.addAll(getStudents().stream().map(Student::getEmail).collect(Collectors.toList()));
+        allEmails.addAll(getTeachers().stream().map(Teacher::getEmail).collect(Collectors.toList()));
+        allEmails.addAll(getDirectors().stream().map(Director::getEmail).collect(Collectors.toList()));
+
+        return allEmails;
+    }
+
+    public void addNewStudent(Student newStudent) {
+        studentRepository.save(Student.builder()
+                        .fullname(newStudent.getFullname())
+                        .email(newStudent.getEmail())
+                        .password(newStudent.getPassword())
+                .build());
+    }
 }

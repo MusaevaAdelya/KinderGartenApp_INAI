@@ -42,7 +42,10 @@ public class GradeService {
             List<Student> allStudents=studentRepository.getAllBy();
             for(Student s:allStudents){
                 List<Grade> studentGrades=gradeRepository.getAllByStudent(s);
-                Double averageGrade=studentGrades.stream().mapToDouble(g -> g.getAverageGrade()).sum()/studentGrades.size();
+                Double averageGrade=0.0;
+                if(studentGrades.size()!=0){
+                    averageGrade=studentGrades.stream( ).mapToDouble(g -> g.getAverageGrade()).sum()/studentGrades.size();
+                }
                 result.add(RatingDto.builder()
                                 .student(StudentDto.from(s))
                                 .grade(averageGrade)
