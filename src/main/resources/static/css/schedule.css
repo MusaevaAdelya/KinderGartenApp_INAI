@@ -281,6 +281,9 @@ input {
 }
 .modal-form-title-style {
     min-width: 130px;
+    font-size: large !important;
+    font-family: 'Poppins',
+    sans-serif;
 }
 
 .modal-header-style {
@@ -315,4 +318,127 @@ input {
 .lesson-info:hover{
     box-shadow: 0 0 20px 0 #AAFBC3,
     0 0 20px 0 rgba(188, 94, 182, 0.19);
+}
+
+
+.sketchy {
+    padding: 1rem 14rem;
+    display: inline-block;
+    border: 3px solid #333333;
+    font-size: 1.4rem;
+    border-radius: 2% 6% 5% 4%/1% 1% 2% 4%;
+    text-transform: uppercase;
+    letter-spacing: 0.3ch;
+    background: #ffffff;
+    position: relative;
+    cursor:pointer;
+    font-family: 'Just Another Hand', cursive;
+}
+.sketchy::before {
+    content: '';
+    border: 2px solid #353535;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0) scale(1.015) rotate(0.5deg);
+    border-radius: 1% 1% 2% 4%/2% 6% 5% 4%;
+}
+
+.time-style {
+    box-shadow: inset 0 0 0 0 #54b3d6;
+    color: #54b3d6;
+    padding: 0 .25rem;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+    font-family: 'Just Another Hand', cursive;
+    font-size: 27px;
+    font-weight: 700;
+    text-decoration: none;
+    z-index: 2 !important;
+}
+.sketchy:hover .time-style {
+    color: #fff;
+    box-shadow: inset 300px 0 0 0 #54b3d6;;
+}
+
+
+/* Select Box */
+
+.custom-select {
+    position: relative;
+    font-family: 'Poppins',
+    sans-serif;
+    border-radius: 25px;
+    width: 300px;
+    font-size: 17px;
+
+}
+
+.custom-select select {
+    display: none;
+    /*hide original SELECT element: */
+}
+
+.select-selected {
+    background-color: #5B8E7D;
+    color:white;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 20px;
+    right: 15px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: white transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent white transparent;
+    top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,
+.select-selected {
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+/* Style items (options): */
+.select-items {
+    position: absolute;
+    background-color: #5B8E7D;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    color:white;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.delete-lesson-btn{
+    text-shadow: -1px -1px 0 #DC3545,
+    1px -1px 0 #DC3545,
+    -1px 1px 0 #DC3545,
+    1px 1px 0 #DC3545;
 }

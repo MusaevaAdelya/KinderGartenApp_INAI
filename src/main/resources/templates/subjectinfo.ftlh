@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/subject_info.css">
+    <link rel="stylesheet" href="/css/subject_info.css?version=51">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -73,6 +73,8 @@
         <div class="container">
             <div class="header-info ">
                 <div class="main-info">
+
+
                     <div class="teacher-photo">
                         <img src="/avatars/${subject.teacher.picture}" alt="professor's photo">
                     </div>
@@ -83,11 +85,14 @@
                         </p>
                         <p class="students-qty"><i class="bi bi-people-fill me-2"></i>${subject.students?size} students</p>
                     </div>
-                    <div class="subject-code">
-                        <div class="subject-code-container">
-                            <p class="m-2">${subject.code}</p>
+                    <div class="subject-code  d-flex flex-row align-self-center" style="height:50px">
+                        <div class="subject-code-container ">
+                            <p class="m-2" id="subject_code">f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454</p>
                         </div>
+                        <button type="button" onclick="CopyToClipboard()" class="copy-code-btn btn btn-outline-success fs-5" id="copy_button" >Copy</button>
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -130,7 +135,7 @@
 
 
 
-    <script type="text/javascript" src="/js/sidebar.js"></script>
+    <script type="text/javascript" src="/js/subject_info.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>

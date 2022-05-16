@@ -10,15 +10,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 @Configuration
 public class InitDataBase {
     @Bean
-    CommandLineRunner initData(DirectorRepository directorRepository, TeacherRepository teacherRepository, StudentRepository studentRepository, SubjectRepository subjectRepository, GradeRepository gradeRepository, AttendanceRepository attendanceRepository, HomeworkRepository homeworkRepository) {
+    CommandLineRunner initData(DirectorRepository directorRepository, TeacherRepository teacherRepository, StudentRepository studentRepository, SubjectRepository subjectRepository, GradeRepository gradeRepository, AttendanceRepository attendanceRepository, HomeworkRepository homeworkRepository, LessonRepository lessonRepository) {
         return args -> {
+            lessonRepository.deleteAll();
             homeworkRepository.deleteAll();
             gradeRepository.deleteAll();
             attendanceRepository.deleteAll();
@@ -181,12 +184,32 @@ public class InitDataBase {
                 }
             }
 
+            List<Lesson> lessons=new ArrayList<>();
+            List<Subject> subjectsTemp=new ArrayList<>(subjects);
+            for(int i=0;i<LocalDate.now().getDayOfMonth();i++){
+                Collections.shuffle(subjectsTemp);
+                LocalTime startTime=LocalTime.parse("08:00");
+                LocalTime endTime=LocalTime.parse("09:30");
+                for(Subject subject: subjectsTemp){
+                    lessons.add(Lesson.builder()
+                                    .startTime(startTime)
+                                    .endTime(endTime)
+                                    .date(LocalDate.now().minusDays(i))
+                                    .subject(subject)
+                            .build());
+
+                    startTime=startTime.plusMinutes(90);
+                    endTime=endTime.plusMinutes(90);
+                }
+            }
+
             studentRepository.saveAll(students);
             teacherRepository.saveAll(teachers);
             subjectRepository.saveAll(subjects);
             gradeRepository.saveAll(grades);
             attendanceRepository.saveAll(attendances);
             homeworkRepository.saveAll(homeworks);
+            lessonRepository.saveAll(lessons);
         };
 
 
