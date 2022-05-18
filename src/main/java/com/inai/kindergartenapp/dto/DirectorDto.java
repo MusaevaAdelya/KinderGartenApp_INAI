@@ -18,6 +18,7 @@ public class DirectorDto {
                 .email(director.getEmail())
                 .accountType(director.getAccountType())
                 .picture(director.getPicture())
+                .password(director.getPassword())
                 .build();
     }
 

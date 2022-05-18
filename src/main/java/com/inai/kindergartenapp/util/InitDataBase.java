@@ -49,7 +49,7 @@ public class InitDataBase {
             teacherNames.add("Rolanda Hooch");
             teacherNames.add("Severus Snape");
 
-            List<String> teachersPhoto = new ArrayList<>(List.of("mcgonagall.jpeg", "lupin.jpg", "hagrid.jpg", "hooch.jpg", "snape.jpg"));
+            List<String> teachersPhoto = new ArrayList<>(List.of("mcgonagall.jpg", "lupin.jpg", "hagrid.jpg", "hooch.jpg", "snape.jpg"));
 
             List<Teacher> teachers = new ArrayList<>();
 
@@ -78,7 +78,7 @@ public class InitDataBase {
             studentNames.add("Viktor Krum");
             studentNames.add("Ginevra Weasley");
 
-            List<String> studentPhotos = new ArrayList<>(List.of("potter.jpg", "granger.jpeg", "ron.jpg", "malfoy.jpg", "lovegood.jpg", "fred.jpg", "fred.jpg", "riddle.jpg", "diggory.jpg", "krum.jpg", "ginevra.jpg"));
+            List<String> studentPhotos = new ArrayList<>(List.of("potter.jpg", "granger.jpg", "ron.jpg", "malfoy.jpg", "lovegood.jpg", "fred.jpg", "fred.jpg", "riddle.jpg", "diggory.jpg", "krum.jpg", "ginevra.jpg"));
 
             List<Student> students = new ArrayList<>();
 

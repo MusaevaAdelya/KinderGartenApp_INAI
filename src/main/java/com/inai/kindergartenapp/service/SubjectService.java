@@ -1,9 +1,9 @@
 package com.inai.kindergartenapp.service;
 
 import com.inai.kindergartenapp.dto.SubjectDto;
-import com.inai.kindergartenapp.entity.Subject;
-import com.inai.kindergartenapp.repository.SubjectRepository;
-import com.inai.kindergartenapp.repository.TeacherRepository;
+import com.inai.kindergartenapp.entity.*;
+import com.inai.kindergartenapp.enums.AccountType;
+import com.inai.kindergartenapp.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 public class SubjectService {
     private final SubjectRepository subjectRepository;
     private final TeacherRepository teacherRepository;
+    private final StudentRepository studentRepository;
+    private final GradeRepository gradeRepository;
 
     public List<SubjectDto> getSubjectsDto(){
         return subjectRepository.getAllBy().stream().map(s->SubjectDto.from(s)).collect(Collectors.toList());
@@ -41,5 +43,47 @@ public class SubjectService {
         }else{
             return subjectRepository.findById(Long.valueOf(subject)).orElseThrow().getName();
         }
+    }
+
+    public void deleteClass(Long studentId, Long subjectId) {
+        Subject subject=subjectRepository.findById(subjectId).orElseThrow();
+        Student student=studentRepository.findById(studentId).orElseThrow();
+        subject.getStudents().remove(student);
+        subjectRepository.save(subject);
+
+    }
+
+    public void enrollStudent(Long studentId, String classroomCode) {
+        Student student=studentRepository.findById(studentId).orElseThrow();
+        Subject subject=subjectRepository.findByCode(classroomCode).orElseThrow();
+        subject.getStudents().add(student);
+        subjectRepository.save(subject);
+
+        gradeRepository.save(Grade.builder()
+                        .student(student)
+                        .subject(subject)
+                .build());
+    }
+
+    public List<SubjectDto> getSubjectsByAccountType(String accountType, String userEmail) {
+        if(accountType.equals(AccountType.STUDENT.getAccountType())){
+            Student student=studentRepository.findByEmail(userEmail).orElseThrow();
+            return getSubjectsByStudent(student);
+        }else if(accountType.equals(AccountType.TEACHER.getAccountType())){
+            Teacher teacher=teacherRepository.findByEmail(userEmail).orElseThrow();
+            return getSubjectsByTeacher(teacher);
+        }else{
+            return getSubjectsDto();
+        }
+    }
+
+    public List<SubjectDto> getSubjectsByStudent(Student student){
+        List<Subject> subjects=subjectRepository.getAllBy().stream().filter(s->s.getStudents().contains(student)).collect(Collectors.toList());
+        return subjects.stream().map(s-> SubjectDto.from(s)).collect(Collectors.toList());
+    }
+
+    public List<SubjectDto> getSubjectsByTeacher(Teacher teacher){
+        List<Subject> subjects=subjectRepository.getAllBy().stream().filter(s->s.getTeacher().getId()==teacher.getId()).collect(Collectors.toList());
+        return subjects.stream().map(s->SubjectDto.from(s)).collect(Collectors.toList());
     }
 }

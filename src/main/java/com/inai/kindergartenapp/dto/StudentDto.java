@@ -20,6 +20,7 @@ public class StudentDto {
                 .email(student.getEmail())
                 .accountType(student.getAccountType())
                 .picture(student.getPicture())
+                .password(student.getPassword())
                 .build();
     }
 

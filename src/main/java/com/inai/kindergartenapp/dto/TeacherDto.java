@@ -20,6 +20,7 @@ public class TeacherDto {
                 .email(teacher.getEmail())
                 .accountType(teacher.getAccountType())
                 .picture(teacher.getPicture())
+                .password(teacher.getPassword())
                 .build();
     }
 

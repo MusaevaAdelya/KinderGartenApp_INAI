@@ -96,7 +96,7 @@
                                 <select name="teacherId" required="required">
                                     <option value="">Select a teacher:</option>
                                     <#list teachers as teacher>
-                                        <option value="${teacher.id}">${teacher.fullname}</option>
+                                        <option value="${teacher.id?c}">${teacher.fullname}</option>
                                     </#list>
                                 </select>
                             </div>
@@ -126,7 +126,7 @@
                     <div class="content">
                         <div class="card-delete-button">
                             <button type="button" class="btn delete-subject-btn" data-bs-toggle="modal"
-                                    data-bs-target="#delete_modal_${subject.id}" style="padding:0">
+                                    data-bs-target="#delete_modal_${subject.id?c}" style="padding:0">
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         </div>
@@ -137,7 +137,7 @@
                         </div>
                     </div>
                     <div class="read-more-button">
-                        <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/subjects/students/${subject.id}" >Read More</a>
+                        <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/subjects/students/${subject.id?c}" >Read More</a>
                     </div>
                 </div>
             </div>
@@ -165,7 +165,7 @@
 
 <#list subjects as subject>
     <!-- Modal Window -->
-    <div class="modal fade" id="delete_modal_${subject.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="delete_modal_${subject.id?c}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -182,7 +182,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <form action="/kindergarten/${user.accountType}/${user.email}/subjects/delete_subject" method="POST" role="form">
-                        <input type="text" name="subjectId" value="${subject.id}" hidden>
+                        <input type="text" name="subjectId" value="${subject.id?c}" hidden>
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
 

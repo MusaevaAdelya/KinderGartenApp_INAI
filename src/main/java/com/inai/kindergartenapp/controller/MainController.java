@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
@@ -45,7 +47,7 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String handleRegisterPost(@ModelAttribute("newStudent") Student newStudent){
+    public String handleRegisterPost(@ModelAttribute("newStudent") Student newStudent) throws IOException {
         if(userService.checkNewStudent(newStudent)){
             userService.addNewStudent(newStudent);
             return String.format("redirect:/kindergarten/%s/%s/subjects",newStudent.getAccountType().toLowerCase(),newStudent.getEmail());

@@ -91,7 +91,7 @@
                         <div class="card border border-3 student-card-style ">
                             <div class="card-body m-0 p-0 position-relative">
                                 <button type="button" class="btn delete-teacher-btn position-absolute" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop${teacher.id}" style="padding:0">
+                                        data-bs-target="#staticBackdrop${teacher.id?c}" style="padding:0">
                                     <i class="bi bi-x-lg text-white"></i>
                                 </button>
                                 <div class="top-gradient-card rounded-top position-relative p-0 m-0">
@@ -115,7 +115,7 @@
     </section>
     <#list teachers as teacher>
         <!-- Modal Window -->
-        <div class="modal fade" id="staticBackdrop${teacher.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        <div class="modal fade" id="staticBackdrop${teacher.id?c}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -132,7 +132,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <form action="/kindergarten/${user.accountType}/${user.email}/teachers/delete_teacher" method="POST" role="form">
-                            <input type="text" name="teacherId" value="${teacher.id}" hidden>
+                            <input type="text" name="teacherId" value="${teacher.id?c}" hidden>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>

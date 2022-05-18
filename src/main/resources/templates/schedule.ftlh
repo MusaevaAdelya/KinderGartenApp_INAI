@@ -86,7 +86,7 @@
                                     <select name="subjectId">
                                         <option>Select a Subject:</option>
                                         <#list subjects as subject>
-                                            <option value="${subject.id}">${subject.name}</option>
+                                            <option value="${subject.id?c}">${subject.name}</option>
                                         </#list>
                                     </select>
                                 </div>
@@ -139,7 +139,7 @@
                 <#list lessons as lesson>
                     <form class="d-flex flex-row" action="/kindergarten/${user.accountType}/${user.email}/schedule/delete_lesson" method="post" role="form">
                         <div class="sketchy my-2 flex-fill"><a class="time-style me-3">${lesson.startTime}-${lesson.endTime}</a>${lesson.subject.name}</div>
-                        <input name="lessonId" type="text" value="${lesson.id}" hidden>
+                        <input name="lessonId" type="text" value="${lesson.id?c}" hidden>
                         <input name="lessonDate" value="${schedule_date}" hidden>
                         <button type="submit" class="btn my-4 ms-3 p-0"><i class="bi bi-x-lg text-danger fs-2 delete-lesson-btn"></i></button>
                     </form>

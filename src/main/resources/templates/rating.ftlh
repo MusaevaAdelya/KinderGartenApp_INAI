@@ -77,7 +77,7 @@
                             <option value="">Select a Subject:</option>
                             <option value="all">All Subjects</option>
                             <#list subjects as subject>
-                                <option value="${subject.id}">${subject.name}</option>
+                                <option value="${subject.id?c}">${subject.name}</option>
                             </#list>
 
                         </select>

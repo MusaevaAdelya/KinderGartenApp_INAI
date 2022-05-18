@@ -66,7 +66,7 @@
     </div>
 
     <!-- Modal Window -->
-    <form method="post" action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id}/new_task" role="form"  class="modal fade" id="addNewTask" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <form method="post" action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id?c}/new_task" role="form"  class="modal fade" id="addNewTask" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -137,7 +137,7 @@
     
         <div class="container mt-4 px-5">
     
-            <form action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id}" method="get" role="form" class="date-picker-container d-flex w-100 mb-4">
+            <form action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id?c}" method="get" role="form" class="date-picker-container d-flex w-100 mb-4">
                 <input type="date" name="date" value="${homework_date}" min="2022-05-01" max="${.now?date}">
                 <button type="sumbit" class="btn submit-date-btn">Submit</button>
                 <button type="button" class="btn rounded-circle add-task-btn" data-bs-toggle="modal"
@@ -148,7 +148,7 @@
                 <ol>
                     <#if homeworks??>
                         <#list homeworks as homework>
-                            <form method="post" action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id}/delete_task" role="form">
+                            <form method="post" action="/kindergarten/${user.accountType}/${user.email}/subjects/homework/${subject.id?c}/delete_task" role="form">
                                 <li class="d-flex flex-row ">
                                     <p class="flex-fill">${homework.task}</p>
                                     <input name="deleteTaskId" value="${homework.id?c}" hidden>

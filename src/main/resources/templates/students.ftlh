@@ -132,14 +132,14 @@
 
         function drawChart() {
             <#list academicProgress as ap>
-                let data_${ap.student.id} = google.visualization.arrayToDataTable([
+                let data_${ap.student.id?c} = google.visualization.arrayToDataTable([
                     ['Subject', 'Academic Progress'],
                     <#list ap.progress as key,value>
                         ['${key.name}', ${value?c}],
                     </#list>
                 ]);
 
-                let options_${ap.student.id} = {'title':'${ap.student.fullname}. Academic Progress',
+                let options_${ap.student.id?c} = {'title':'${ap.student.fullname}. Academic Progress',
                     'width':850, 'height':550,
                     'legend.alignment':'center',
                     'fontName':" 'Poppins', san-serif",
@@ -151,8 +151,8 @@
                     }
                 };
 
-                let chart_${ap.student.id} = new google.visualization.PieChart(document.getElementById('piechart_${ap.student.id}'));
-                chart_${ap.student.id}.draw(data_${ap.student.id}, options_${ap.student.id});
+                let chart_${ap.student.id?c} = new google.visualization.PieChart(document.getElementById('piechart_${ap.student.id?c}'));
+                chart_${ap.student.id?c}.draw(data_${ap.student.id}, options_${ap.student.id?c});
 
 
             </#list>
