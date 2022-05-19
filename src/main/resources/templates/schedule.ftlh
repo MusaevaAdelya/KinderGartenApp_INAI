@@ -26,8 +26,14 @@
             <p>${user.accountType}</p>
         </div>
         <ul class="nav-list">
+            <li>
+                <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/profile">
+                    <i class="bi bi-person-circle"></i>
+                    <span class="links_name">Profile</span>
+                </a>
+            </li>
             <li >
-                <a href="#">
+                <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/subjects">
                     <i class="bi bi-book-half"></i>
                     <span class="links_name">Subjects</span>
                 </a>
@@ -57,7 +63,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a  data-bs-toggle="modal" data-bs-target="#logOutModal" style="cursor:pointer">
                     <i class="bi bi-box-arrow-left"></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -65,6 +71,30 @@
         </ul>
     </div>
 
+    <!-- Modal Window Log out -->
+    <div class="modal fade" id="logOutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel_2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel_2"><i
+                                class="bi bi-exclamation-octagon text-danger fw-bold fs-2 pe-2"></i>Are you
+                        sure?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Do you really want to log out?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a  href="http://localhost:8080/" class="btn btn-danger" style="text-decoration: none">Log out</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <#if user.accountType=="director">
     <!-- Modal Window -->
     <form action="/kindergarten/${user.accountType}/${user.email}/schedule/add_lesson" method="post" role="form">
         <div class="modal fade" id="addNewClass" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -123,6 +153,7 @@
             </div>
         </div>
     </form>
+    </#if>
 
     <div class="main-section pt-5">
     
@@ -131,8 +162,10 @@
             <form action="/kindergarten/${user.accountType}/${user.email}/schedule" method="get" role="form" class="date-picker-container d-flex w-100 mb-4">
                 <input type="date" name="date" value="${schedule_date}" min="2022-05-01">
                 <button type="submit" class="btn submit-date-btn">Submit</button>
+                <#if user.accountType=="director">
                 <button type="button" class="btn rounded-circle add-task-btn" data-bs-toggle="modal"
                         data-bs-target="#addNewClass"><i class="bi bi-plus-lg"></i></button>
+                </#if>
             </form>
 
             <div class="d-flex flex-column">
@@ -141,7 +174,9 @@
                         <div class="sketchy my-2 flex-fill"><a class="time-style me-3">${lesson.startTime}-${lesson.endTime}</a>${lesson.subject.name}</div>
                         <input name="lessonId" type="text" value="${lesson.id?c}" hidden>
                         <input name="lessonDate" value="${schedule_date}" hidden>
+                        <#if user.accountType=="director">
                         <button type="submit" class="btn my-4 ms-3 p-0"><i class="bi bi-x-lg text-danger fs-2 delete-lesson-btn"></i></button>
+                        </#if>
                     </form>
                 </#list>
             </div>

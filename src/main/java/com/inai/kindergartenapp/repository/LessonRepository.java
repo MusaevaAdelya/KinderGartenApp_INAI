@@ -1,10 +1,12 @@
 package com.inai.kindergartenapp.repository;
 
 import com.inai.kindergartenapp.entity.Lesson;
+import com.inai.kindergartenapp.entity.Subject;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 public interface LessonRepository extends CrudRepository<Lesson,Long> {
@@ -14,4 +16,8 @@ public interface LessonRepository extends CrudRepository<Lesson,Long> {
 
 
     void deleteById(Long lessonId);
+
+    void deleteAllBySubject(Subject subject);
+
+    List<Lesson> findAllBySubject(Subject subject);
 }

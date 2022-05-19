@@ -18,7 +18,7 @@ public class TeachersController {
     private final GradeService gradeService;
 
     @GetMapping
-    public String allSubjects(@PathVariable("accountType")String accountType , @PathVariable("userEmail") String userEmail, Model model){
+    public String teachersPage(@PathVariable("accountType")String accountType , @PathVariable("userEmail") String userEmail, Model model){
         model.addAttribute("teachers",teacherService.getAllTeachers());
 
         if(accountType.equals(AccountType.DIRECTOR.getAccountType().toLowerCase())){
@@ -33,7 +33,7 @@ public class TeachersController {
     }
 
     @PostMapping("/delete_teacher")
-    public String deleteSubject(@PathVariable("accountType")String accountType ,@PathVariable("userEmail") String userEmail,@RequestParam String teacherId){
+    public String deleteTeacher(@PathVariable("accountType")String accountType ,@PathVariable("userEmail") String userEmail,@RequestParam String teacherId){
         teacherService.deleteTeacherById(teacherId);
         return String.format("redirect:/kindergarten/%s/%s/teachers",accountType.toLowerCase(),userEmail);
     }

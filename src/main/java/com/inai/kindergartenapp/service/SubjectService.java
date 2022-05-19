@@ -7,6 +7,7 @@ import com.inai.kindergartenapp.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,9 @@ public class SubjectService {
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
     private final GradeRepository gradeRepository;
+    private final AttendanceRepository attendanceRepository;
+    private final HomeworkRepository homeworkRepository;
+    private final LessonRepository lessonRepository;
 
     public List<SubjectDto> getSubjectsDto(){
         return subjectRepository.getAllBy().stream().map(s->SubjectDto.from(s)).collect(Collectors.toList());
@@ -30,7 +34,22 @@ public class SubjectService {
     }
 
     public void deleteSubjectById(String subjectId){
+        Subject subject=subjectRepository.findById(Long.valueOf(subjectId)).orElseThrow();
+
+        List<Long> attendanceId=attendanceRepository.findAllBySubject(subject).stream().map(Attendance::getId).collect(Collectors.toList());
+        attendanceRepository.deleteAllById(attendanceId);
+
+        List<Long> gradesId=gradeRepository.findAllBySubject(subject).stream().map(Grade::getId).collect(Collectors.toList());
+        gradeRepository.deleteAllById(gradesId);
+
+        List<Long> homeworksId=homeworkRepository.findAllBySubject(subject).stream().map(Homework::getId).collect(Collectors.toList());
+        homeworkRepository.deleteAllById(homeworksId);
+
+        List<Long> lessonsId=lessonRepository.findAllBySubject(subject).stream().map(Lesson::getId).collect(Collectors.toList());
+        lessonRepository.deleteAllById(lessonsId);
+
         subjectRepository.deleteById(Long.valueOf(subjectId));
+
     }
 
     public Subject findById(Long subjectId) {

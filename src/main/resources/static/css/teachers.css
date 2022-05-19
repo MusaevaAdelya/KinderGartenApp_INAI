@@ -220,7 +220,6 @@
 
 .student-card-style {
     filter: grayscale(30%);
-    cursor: pointer;
 }
 
 .top-gradient-card {

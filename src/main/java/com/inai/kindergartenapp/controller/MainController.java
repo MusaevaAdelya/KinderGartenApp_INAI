@@ -30,7 +30,7 @@ public class MainController {
                                   @RequestParam String accountType){
         if(userService.checkUser(userEmail,userPassword,accountType)){
             if(accountType.equals(AccountType.DIRECTOR.getAccountType())){
-                return "redirect:/kindergarten/"+accountType.toLowerCase()+"/"+userEmail+"/subjects";
+                return "redirect:/kindergarten/"+accountType.toLowerCase()+"/"+userEmail+"/profile";
             }else{
                 return "";
             }
@@ -50,7 +50,7 @@ public class MainController {
     public String handleRegisterPost(@ModelAttribute("newStudent") Student newStudent) throws IOException {
         if(userService.checkNewStudent(newStudent)){
             userService.addNewStudent(newStudent);
-            return String.format("redirect:/kindergarten/%s/%s/subjects",newStudent.getAccountType().toLowerCase(),newStudent.getEmail());
+            return String.format("redirect:/kindergarten/%s/%s/profile",newStudent.getAccountType().toLowerCase(),newStudent.getEmail());
         }else{
             return String.format("redirect:/register?invalid=%s",newStudent.getEmail());
         }

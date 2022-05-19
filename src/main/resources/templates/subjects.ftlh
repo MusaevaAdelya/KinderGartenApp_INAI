@@ -26,6 +26,12 @@
         <p>${user.accountType?capitalize}</p>
     </div>
     <ul class="nav-list">
+        <li>
+            <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/profile">
+                <i class="bi bi-person-circle"></i>
+                <span class="links_name">Profile</span>
+            </a>
+        </li>
         <li class="active">
             <a href="#">
                 <i class="bi bi-book-half"></i>
@@ -51,13 +57,13 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/schedule">
                 <i class="bi bi-calendar4-week"></i>
                 <span class="links_name">Schedule</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a  data-bs-toggle="modal" data-bs-target="#logOutModal" style="cursor:pointer">
                 <i class="bi bi-box-arrow-left"></i>
                 <span class="links_name">Log out</span>
             </a>
@@ -65,54 +71,59 @@
     </ul>
 </div>
 
-<!--Add New Subject Modal Window-->
-<div class="modal fade" id="addNewSubject" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-info bg-gradient bg-opacity-50">
-                <h5 class="modal-title " id="staticBackdropLabel">New Subject</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="/kindergarten/${user.accountType}/${user.email}/subjects/newsubject" method="POST" role="form">
-                <div class="modal-body modal-body-style">
+<#if user.accountType=="director">
 
-                    <div class="row g-3 align-items-center mb-4 mt-3">
-                        <div class="col-auto">
-                            <label for="inputPassword6" class="col-form-label  modal-form-title-style">Title</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" id="inputPassword6" class="form-control input-bar"
-                                   aria-describedby="passwordHelpInline" name="subjectTitle" required="required">
-                        </div>
-                    </div>
-                    <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                            <label for="inputPassword6"
-                                   class="col-form-label modal-form-title-style">Teacher</label>
-                        </div>
-                        <div class="col-auto">
-                            <div class="custom-select">
-                                <select name="teacherId" required="required">
-                                    <option value="">Select a teacher:</option>
-                                    <#list teachers as teacher>
-                                        <option value="${teacher.id?c}">${teacher.fullname}</option>
-                                    </#list>
-                                </select>
+
+    <!--Add New Subject Modal Window-->
+    <div class="modal fade" id="addNewSubject" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-info bg-gradient bg-opacity-50">
+                    <h5 class="modal-title " id="staticBackdropLabel">New Subject</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/kindergarten/${user.accountType}/${user.email}/subjects/newsubject" method="POST"
+                      role="form">
+                    <div class="modal-body modal-body-style">
+
+                        <div class="row g-3 align-items-center mb-4 mt-3">
+                            <div class="col-auto">
+                                <label for="inputPassword6" class="col-form-label  modal-form-title-style">Title</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="inputPassword6" class="form-control input-bar"
+                                       aria-describedby="passwordHelpInline" name="subjectTitle" required="required">
                             </div>
                         </div>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <label for="inputPassword6"
+                                       class="col-form-label modal-form-title-style">Teacher</label>
+                            </div>
+                            <div class="col-auto">
+                                <div class="custom-select">
+                                    <select name="teacherId" required="required">
+                                        <option value="">Select a teacher:</option>
+                                        <#list teachers as teacher>
+                                            <option value="${teacher.id?c}">${teacher.fullname}</option>
+                                        </#list>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn submit-btn">Submit</button>
+                    </div>
+                </form>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn submit-btn">Submit</button>
-                </div>
-            </form>
-
+            </div>
         </div>
     </div>
-</div>
+</#if>
 
 <section class="main-section">
 
@@ -124,12 +135,14 @@
             <div class="card">
                 <div class="box ">
                     <div class="content">
-                        <div class="card-delete-button">
-                            <button type="button" class="btn delete-subject-btn" data-bs-toggle="modal"
-                                    data-bs-target="#delete_modal_${subject.id?c}" style="padding:0">
-                                <i class="bi bi-x-lg"></i>
-                            </button>
-                        </div>
+                        <#if user.accountType=="director">
+                            <div class="card-delete-button">
+                                <button type="button" class="btn delete-subject-btn" data-bs-toggle="modal"
+                                        data-bs-target="#delete_modal_${subject.id?c}" style="padding:0">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </div>
+                        </#if>
                         <h3>${subject.name}</h3>
                         <div class="card-text">
                             <p><i class="bi bi-person-workspace"></i> ${subject.teacher.fullname}</p>
@@ -137,25 +150,28 @@
                         </div>
                     </div>
                     <div class="read-more-button">
-                        <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/subjects/students/${subject.id?c}" >Read More</a>
+                        <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/subjects/students/${subject.id?c}">Read
+                            More</a>
                     </div>
                 </div>
             </div>
 
         </#list>
 
-        <div class="card">
-            <div class="box add-new-card-box">
-                <div class="content">
-                    <!--Add New Subject Modal Button-->
-                    <button type="button" class="btn shadow-none" data-bs-toggle="modal"
-                            data-bs-target="#addNewSubject">
-                        <i class="bi bi-plus-square-dotted add-new-card-icon "></i>
-                    </button>
+        <#if user.accountType=="director">
+            <div class="card">
+                <div class="box add-new-card-box">
+                    <div class="content">
+                        <!--Add New Subject Modal Button-->
+                        <button type="button" class="btn shadow-none" data-bs-toggle="modal"
+                                data-bs-target="#addNewSubject">
+                            <i class="bi bi-plus-square-dotted add-new-card-icon "></i>
+                        </button>
 
+                    </div>
                 </div>
             </div>
-        </div>
+        </#if>
 
 
     </div>
@@ -165,7 +181,8 @@
 
 <#list subjects as subject>
     <!-- Modal Window -->
-    <div class="modal fade" id="delete_modal_${subject.id?c}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="delete_modal_${subject.id?c}" data-bs-backdrop="static" data-bs-keyboard="false"
+         tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -181,7 +198,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <form action="/kindergarten/${user.accountType}/${user.email}/subjects/delete_subject" method="POST" role="form">
+                    <form action="/kindergarten/${user.accountType}/${user.email}/subjects/delete_subject" method="POST"
+                          role="form">
                         <input type="text" name="subjectId" value="${subject.id?c}" hidden>
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
@@ -193,6 +211,28 @@
 
 </#list>
 
+<!-- Modal Window Log out -->
+<div class="modal fade" id="logOutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel_2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel_2"><i
+                            class="bi bi-exclamation-octagon text-danger fw-bold fs-2 pe-2"></i>Are you
+                    sure?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Do you really want to log out?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a  href="http://localhost:8080/" class="btn btn-danger" style="text-decoration: none">Log out</a>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script type="text/javascript" src="/js/subject.js"></script>

@@ -5,6 +5,7 @@ import com.inai.kindergartenapp.entity.Student;
 import com.inai.kindergartenapp.entity.Subject;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface GradeRepository extends CrudRepository<Grade,Long> {
@@ -17,4 +18,6 @@ public interface GradeRepository extends CrudRepository<Grade,Long> {
     Grade findByStudentAndSubject(Student student,Subject subject);
 
     List<Grade> getAllBySubjectOrderByStudentFullname(Subject subject);
+
+    List<Grade> findAllBySubject(Subject subject);
 }

@@ -20,7 +20,7 @@ public class StudentsController {
     private final GradeService gradeService;
 
     @GetMapping
-    public String allSubjects(@PathVariable("accountType")String accountType , @PathVariable("userEmail") String userEmail, Model model){
+    public String studentsPage(@PathVariable("accountType")String accountType , @PathVariable("userEmail") String userEmail, Model model){
         model.addAttribute("grades",studentSerivice.studentGrades());
 
         model.addAttribute("academicProgress",gradeService.getStudentsAcademicProgress());

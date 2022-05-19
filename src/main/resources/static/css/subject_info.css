@@ -300,11 +300,12 @@
 .nav-bar-section{
     padding-bottom:10px;
     border-bottom:1px solid rgb(174, 171, 171);
+    text-decoration: none !important;
 }
 
-.active-page {
-    color:#FB8501;
-    border-bottom: 5px solid #FB8501;
+.active-tab {
+    color:#FB8501 !important;
+    border-bottom: 5px solid #FB8501 !important;
 }
 
 

@@ -301,6 +301,8 @@
 .nav-bar-section {
     padding-bottom: 10px;
     border-bottom: 1px solid rgb(174, 171, 171);
+    text-decoration: none;
+    text-underline: none;
 }
 
 .active-tab {

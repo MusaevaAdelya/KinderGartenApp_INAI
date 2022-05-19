@@ -23,7 +23,7 @@ public class ProfileController {
     private final ProfileService profileService;
 
     @GetMapping
-    public String getHomeworkPage(@PathVariable("accountType") String accountType,
+    public String getProfilePage(@PathVariable("accountType") String accountType,
                                   @PathVariable("userEmail") String userEmail, Model model) {
 
         model.addAttribute("subjects", subjectService.getSubjectsByAccountType(accountType, userEmail));

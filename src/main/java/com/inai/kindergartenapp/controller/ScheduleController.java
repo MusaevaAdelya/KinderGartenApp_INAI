@@ -18,7 +18,7 @@ public class ScheduleController {
     private final LessonService lessonService;
 
     @GetMapping
-    public String rating(@PathVariable("accountType")String accountType , @PathVariable("userEmail") String userEmail,
+    public String getSchedulePage(@PathVariable("accountType")String accountType , @PathVariable("userEmail") String userEmail,
                          @RequestParam(name="date", required = false) String date, Model model){
         model.addAttribute("subjects",subjectService.getSubjectsDto());
         model.addAttribute("schedule_date", lessonService.getDate(date));

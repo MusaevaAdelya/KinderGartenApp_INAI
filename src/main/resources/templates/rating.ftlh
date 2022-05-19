@@ -28,6 +28,12 @@
             <p>${user.accountType?capitalize}</p>
         </div>
         <ul class="nav-list">
+            <li>
+                <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/profile">
+                    <i class="bi bi-person-circle"></i>
+                    <span class="links_name">Profile</span>
+                </a>
+            </li>
             <li >
                 <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/subjects">
                     <i class="bi bi-book-half"></i>
@@ -53,18 +59,40 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="http://localhost:8080/kindergarten/${user.accountType}/${user.email}/schedule">
                     <i class="bi bi-calendar4-week"></i>
                     <span class="links_name">Schedule</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a  data-bs-toggle="modal" data-bs-target="#logOutModal" style="cursor:pointer">
                     <i class="bi bi-box-arrow-left"></i>
                     <span class="links_name">Log out</span>
                 </a>
             </li>
         </ul>
+    </div>
+    <!-- Modal Window Log out -->
+    <div class="modal fade" id="logOutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel_2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel_2"><i
+                                class="bi bi-exclamation-octagon text-danger fw-bold fs-2 pe-2"></i>Are you
+                        sure?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Do you really want to log out?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a  href="http://localhost:8080/" class="btn btn-danger" style="text-decoration: none">Log out</a>
+
+                </div>
+            </div>
+        </div>
     </div>
 
     <section class="main-section mb-0 pb-0 pt-4 px-5">
